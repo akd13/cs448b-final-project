@@ -25,3 +25,4 @@ yarn-error.log*
 # system files
 .firebase
 .idea
+firebase-debug.log
