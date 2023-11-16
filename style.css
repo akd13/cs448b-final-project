@@ -1,0 +1,150 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Karla","sans-serif";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.city-button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: rgba(5, 4, 4, 0.58);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 20px;
+}
+
+#heading {
+    font-family: "Karla","sans-serif";
+    font-size: 30px;
+    font-weight: 400;
+    color: #fcdcbf;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    z-index: 1000;
+    position: absolute;
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: rgba(5, 4, 4, 0.58);
+    border: none;
+    border-radius: 5px;
+    top: 20px;
+    left: 20px;
+}
+
+.cities-list {
+    color: white;
+    font-size: x-large;
+    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 250px;
+}
+#prev-continent {
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    transform: rotate(180deg);
+}
+
+#next-continent {
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.cities-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.cities-list h2 {
+    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    pointer-events: none !important;
+    cursor: pointer;
+    text-align: left;
+    color: #fcdcbf;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.cities-list h3 {
+    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    pointer-events: none !important;
+    cursor: pointer;
+    text-align: left;
+    color: #fcdcbf;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+
+.cities-list ul {
+    list-style-type: none;
+    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #fcdcbf;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    padding: 0;
+    margin: 0;
+}
+
+.cities-list li {
+    margin-bottom: 2px;
+    font-weight: 400;
+    color: #fcdcbf;
+    list-style-type: none;
+    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-size: 25px;
+    line-height: 48px;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    border-bottom: 1px solid #fcdcbf;
+    cursor: pointer;
+}
+
+.speed-control {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.speed-control label {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    line-height: 28px;
+    color: #fcdcbf;
+    margin-bottom: 5px;
+}
+
+.speed-control input[type="range"] {
+    width: 100%;
+}
