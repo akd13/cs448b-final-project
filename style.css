@@ -148,3 +148,19 @@ body {
 .speed-control input[type="range"] {
     width: 100%;
 }
+
+.arrow-container {
+    position: absolute;
+    top: 80%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.arrow-link {
+    text-decoration: none;
+    margin: 0 10px;
+}

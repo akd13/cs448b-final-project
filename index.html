@@ -39,7 +39,7 @@
     // })
     // console.log("check scene", world.scene());
 
-    fetch('locations_and_views.csv').then(res => res.text())
+    fetch('data/locations_and_views.csv').then(res => res.text())
         .then(csv => d3.csvParse(csv, ({lat, lng, name, city, country, meanviews, numtalks}) => ({
             lat: +lat, lng: +lng, name: name, city: city, country: country,
             views: +meanviews, numtalks: +numtalks
@@ -65,7 +65,7 @@
     /**************/
     let cityData = [];
 
-    d3.csv('top-cities-views.csv').then(data => {
+    d3.csv('data/top-cities-views.csv').then(data => {
         cityData = data;
         updateCityList('Americas');
     });
@@ -207,4 +207,12 @@
         updateCityList(continents[currentContinentIndex]);
     });
 </script>
+<!--<div class="arrow-container">-->
+<!--    <a href="prev.html" class="arrow-link">-->
+<!--        ← Go to Page 1-->
+<!--    </a>-->
+<!--    <a href="next.html" class="arrow-link" style="margin-bottom: 30px">-->
+<!--        Go to Page 2 →-->
+<!--    </a>-->
+<!--</div>-->
 </body>
