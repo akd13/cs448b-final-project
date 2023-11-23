@@ -1,7 +1,7 @@
 # cs448b-final-project
 
 ## Visualisation
-Viz 2:[Does a Speaker's Birthplace Influence the Popularity of Their TED Talks?]](https://cs448b-final-project-eeb9e.web.app)
+Viz 2:[Does a Speaker's Birthplace Influence the Popularity of Their TED Talks?](https://cs448b-final-project-eeb9e.web.app)
 
 ### Sources
 

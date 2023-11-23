@@ -59,7 +59,7 @@
                 }
             }));
     world.controls().autoRotate = true;
-    world.controls().autoRotateSpeed = 0.05;
+    world.controls().autoRotateSpeed = 0.01;
 
     /* Load top 5 cities for each continent */
     /**************/
@@ -182,7 +182,7 @@
 </div>
 <div class="speed-control">
     <label for="rotateSpeed">Globe Rotation Speed</label>
-    <input type="range" id="rotateSpeed" min=0 max=1.0 step=0.01 value=0.05>
+    <input type="range" id="rotateSpeed" min=0 max=1.0 step=0.01 value=0.01>
 </div>
 <script>
     document.getElementById('rotateSpeed').addEventListener('input', function(e) {
