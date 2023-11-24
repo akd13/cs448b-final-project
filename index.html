@@ -70,6 +70,13 @@
         updateCityList('Americas');
     });
 
+    /* Load country code data for maps */
+    /**************/
+    let countryCodeData = {};
+    d3.json('data/country-code.json').then(data => {
+        countryCodeData = data;
+    });
+
 
     /* Utility functions */
     /**************/
@@ -128,6 +135,9 @@
             let label = '<div class="speaker-info">';
             const city = d.points[0].city;
             const country = d.points[0].country;
+            let countryCode = countryCodeData[country];
+            console.log("countryCode", countryCode);
+            label += `<img class="card-img" alt="Flag not available" style="border-color: white" src="https://flagsapi.com/${countryCode}/flat/64.png" alt="flag" />`
             label += `<div id="speaker-title" style="margin-bottom: 5px; font-size: x-large">${city}, ${country}</div>`;
             // label += `<div id="speaker-location" style="margin-bottom: 3px; font-size: large">${city}, ${country}</div>`
             const sortedPoints = d.points.sort((a, b) => b.views - a.views); //sort points
