@@ -52,14 +52,15 @@
             .hexSideColor(d => weightColor(d.sumWeight))
             .hexAltitude(d => d.sumWeight * 7e-9)
             .hexLabel(d => generateSpeakerLabel(d))
-            .onHexClick(d => console.log("OnHexClick", d))
-            .onHexHover((hex, prevHex) => {
-                if (hex) {
-                    console.log("OnHexHover", hex);
-                }
-            }));
+            // .onHexClick(d => console.log("OnHexClick", d))
+            // .onHexHover((hex, prevHex) => {
+            //     if (hex) {
+            //         console.log("OnHexHover", hex);
+            //     }
+            // })
+        );
     world.controls().autoRotate = true;
-    world.controls().autoRotateSpeed = 0.01;
+    world.controls().autoRotateSpeed = 0.01; //update with method later
 
     /* Load top 5 cities for each continent */
     /**************/
@@ -80,7 +81,7 @@
 
     /* Utility functions */
     /**************/
-    // hardcode altitude zoom based on views.
+    // hardcode altitude zoom based on views - too much work required to do at country level
     let altZoomMap = {
         'Americas': 1.15,
         'Asia': 0.25,
@@ -102,23 +103,11 @@
     }
 
     updateCityList(continents[currentContinentIndex]);
-    //TODO: Remove Chris Anderson (TED), His Holiness Pope Francis, Ziauddin Yousafzai (Malala's father), Michael Anti, Mark Roth
-    function animateToLocation(targetLat, targetLng, targetAlt, duration = 2000) {
-        const initialPointOfView = world.pointOfView();
-        const startTime = Date.now();
-        const interval = setInterval(() => {
-            const elapsedTime = Date.now() - startTime;
-            const fraction = Math.min(1, elapsedTime / duration);
-            const newLat = initialPointOfView.lat + fraction * (targetLat - initialPointOfView.lat);
-            const newLng = initialPointOfView.lng + fraction * (targetLng - initialPointOfView.lng);
-            world.pointOfView({lat: newLat, lng: newLng}, 0);
-            world.pointOfView({lat: newLat, lng: newLng, altitude: targetAlt}, 2500);
-            // world.hexTopColor(d => d.points[0].city === targetCity ? 'lightskyblue' : weightColor(d.sumWeight));
-            if (fraction === 1) {
-                clearInterval(interval);
-            }
-        }, 10);
-
+    //TODO: Wrong items, remove Chris Anderson (TED), His Holiness Pope Francis,
+    // Ziauddin Yousafzai (Malala's father), Michael Anti, Mark Roth
+    function animateToLocation(targetLat, targetLng, targetAlt) {
+        world.pointOfView({lat: targetLat, lng: targetLng}, 1000);
+        world.pointOfView({lat: targetLat, lng: targetLng, altitude: targetAlt}, 2500);
     }
 
     function formatViews(views) {
