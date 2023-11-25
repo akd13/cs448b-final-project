@@ -47,13 +47,11 @@ d3.csv("data/americas.csv").then(function (data) {
         .attr("r", 5)
         .style("fill", "#69b3a2")
         .style("opacity", 0.7)
-        .style("stroke-width", 1)
-        .style("stroke", "black")
         .on('mouseover', function (event, d) {
-            d3.select(this).attr('stroke', '#333').attr('stroke-width', 2);
+            d3.select(this).attr('stroke', 'black').attr('stroke-width', 2);
         })
         .on('mouseout', function () {
-            d3.select(this).attr('stroke', 'white').attr('stroke-width', 1);
+            d3.select(this).attr('stroke', null)
         })
         .append('title')
         .attr('class', 'tooltip')
