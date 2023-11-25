@@ -1,3 +1,24 @@
+/*   Dropdown Button   */
+/**********************/
+
+const attributes = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
+const select = d3.select("#attribute-selector");
+select.selectAll("option")
+    .data(attributes)
+    .enter()
+    .append("option")
+    .text(d => d)
+    .attr("value", d => d);
+
+/* Dropdown Selection */
+/**********************/
+select.on('change', function() {
+    const selectedAttribute = d3.select(this).property('value');
+    // updatePlot(selectedAttribute);
+});
+
+/*     Create SVG       */
+/**********************/
 const margin = {top: 50, right: 90, bottom: 50, left: 90}, width = 960 - margin.left - margin.right,
     height = 650 - margin.top - margin.bottom;
 
@@ -10,7 +31,9 @@ const svg = d3.select("#viz3-svg")
 
 d3.csv("data/americas.csv").then(function (data) {
     data.forEach(function (d) {
-        d.Funny = +d.Funny;
+        attributes.forEach(attr => {
+            d[attr] = +d[attr];
+        });
         d.views = +d.views;
     });
 
