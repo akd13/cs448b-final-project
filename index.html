@@ -100,8 +100,6 @@
     }
 
     updateCityList(continents[currentContinentIndex]);
-    //TODO: Wrong items, remove Chris Anderson (TED), His Holiness Pope Francis,
-    // Ziauddin Yousafzai (Malala's father), Michael Anti, Mark Roth
     function animateToLocation(targetLat, targetLng, targetAlt) {
         world.pointOfView({lat: targetLat, lng: targetLng}, 1000);
         world.pointOfView({lat: targetLat, lng: targetLng, altitude: targetAlt}, 2500);
