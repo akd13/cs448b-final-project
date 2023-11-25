@@ -163,27 +163,17 @@ body {
 .arrow-link {
     text-decoration: none;
     margin: 0 10px;
-}
-
-#scatterplot {
-    width: 600px;
-    height: 400px;
-    transform: translateY(50%);
-}
-
-.dot {
-    fill: steelblue;
-    stroke: #f5f5f5;
-}
-
-.dot:hover {
-    fill: orange;
+    color: white;
 }
 
 #viz3 {
     background-image: url("images/night-sky.png");
 }
 
-#x-axis, #y-axis {
+#viz3-svg {
+    transform: translateY(30%);
+}
+
+.axes {
     color: white;
 }
