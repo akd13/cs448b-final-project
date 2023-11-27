@@ -1,0 +1,209 @@
+<head>
+    <title>Visualisation 2</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="//unpkg.com/d3"></script>
+    <script src="//unpkg.com/d3-dsv"></script>
+    <script src="//unpkg.com/globe.gl"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+          }
+        }
+    </script>
+</head>
+
+<body>
+<div id="globeViz"></div>
+<div class="tooltip" id="tooltip"></div>
+<script>
+    const weightColor = d3.scaleSequentialSqrt(d3.interpolateYlOrRd)
+        .domain([0, 1e7]);
+    const world = Globe()
+    (document.getElementById('globeViz'))
+        .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+        .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+        .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+        .hexAltitude(0)
+        .hexBinResolution(4)
+        .hexBinMerge(true)
+    // .onZoom(d => {
+    //   console.log("OnZoom",d);
+    // })
+    // console.log("check scene", world.scene());
+
+    fetch('data/locations_and_views.csv').then(res => res.text())
+        .then(csv => d3.csvParse(csv, ({lat, lng, name, city, country, meanviews, numtalks}) => ({
+            lat: +lat, lng: +lng, name: name, city: city, country: country,
+            views: +meanviews, numtalks: +numtalks
+        })))
+        .then(data => world
+            .hexBinPointsData(data)
+            .hexBinMerge(false)
+            .hexBinPointWeight('views')
+            .hexTopColor(d => weightColor(d.sumWeight))
+            .hexSideColor(d => weightColor(d.sumWeight))
+            .hexAltitude(d => d.sumWeight * 7e-9)
+            .hexLabel(d => generateSpeakerLabel(d))
+            // .onHexClick(d => console.log("OnHexClick", d))
+            // .onHexHover((hex, prevHex) => {
+            //     if (hex) {
+            //         console.log("OnHexHover", hex);
+            //     }
+            // })
+        );
+    world.controls().autoRotate = true;
+    world.controls().autoRotateSpeed = 0.01; //update with method later
+
+    /* Load top 5 cities for each continent */
+    /**************/
+    let cityData = [];
+
+    d3.csv('data/top-cities-views.csv').then(data => {
+        cityData = data;
+        updateCityList('Americas');
+    });
+
+    /* Load country code data for maps */
+    /**************/
+    let countryCodeData = {};
+    d3.json('data/country-code.json').then(data => {
+        countryCodeData = data;
+    });
+
+
+    /* Utility functions */
+    /**************/
+    // hardcode altitude zoom based on views - too much work required to do at country level
+    let altZoomMap = {
+        'Americas': 1.15,
+        'Asia': 0.25,
+        'Africa': 0.25,
+        'Europe': 1.05,
+        'Oceania': 0.25
+    }
+
+    const continents = ['Americas', 'Asia', 'Africa', 'Europe', 'Oceania'];
+    let currentContinentIndex = 0;
+    function updateCityList(continent) {
+        const continentTitle = document.querySelector('.cities-list h2');
+        continentTitle.textContent = continent;
+        const citiesList = document.querySelector('.cities-list ul');
+        citiesList.innerHTML = '';
+        cityData.filter(city => city.continent === continent).forEach(city => {
+            const cityItem = document.createElement('li');
+            cityItem.textContent = city.city;
+            cityItem.onclick = () => animateToLocation(city.lat, city.lng, altZoomMap[continent]);
+            citiesList.appendChild(cityItem);
+        });
+    }
+
+    updateCityList(continents[currentContinentIndex]);
+    function animateToLocation(targetLat, targetLng, targetAlt) {
+        world.pointOfView({lat: targetLat, lng: targetLng}, 1000);
+        world.pointOfView({lat: targetLat, lng: targetLng, altitude: targetAlt}, 2500);
+    }
+
+    function formatViews(views) {
+        if (views >= 1000000) {
+            return (views / 1000000).toFixed(1) + 'M';
+        } else if (views >= 1000) {
+            return (views / 1000).toFixed(1) + 'K';
+        } else {
+            return views.toString();
+        }
+    }
+    function generateSpeakerLabel(d) {
+        if (d.points && d.points.length > 0) {
+            let label = '<div class="speaker-info">';
+            const city = d.points[0].city;
+            const country = d.points[0].country;
+            let countryCode = countryCodeData[country];
+            // console.log("countryCode", countryCode);
+            label += `<img class="card-img" alt="Flag not available" style="border-color: white" src="https://flagsapi.com/${countryCode}/flat/64.png" alt="flag" />`
+            label += `<div id="speaker-title" style="margin-bottom: 5px; font-size: x-large">${city}, ${country}</div>`;
+            const sortedPoints = d.points.sort((a, b) => b.views - a.views); //sort points
+            const displayedPoints = sortedPoints.slice(0, 5); // Get the top 5 points
+            displayedPoints.forEach(point => {
+                const maxViews = Math.max(...displayedPoints.map(p => p.views));
+                const barWidth = (point.views / maxViews) * 200;
+                const formattedViews = formatViews(point.views);
+                let optionalViewsWord = '';
+                if (barWidth > 55) {
+                    optionalViewsWord = 'views';
+                }
+                // console.log("barwidth",barWidth);
+                label += `<div class="speaker-entry">`;
+                label += `<div class="speaker-name">${point.name} </div>`; //(Talks: ${point.numtalks})
+                label += `<div class="speaker-bar-container">`;
+                label += `<div class="speaker-bar" style="width: ${barWidth}%; background-image: linear-gradient(rgb(58,40,131), rgba(210,91,204,0.81)); margin-bottom: 2px; height: 20px; color: white; text-align: right; padding-right: 5px;">${formattedViews} ${optionalViewsWord}</div>`;
+                label += `</div></div>`;
+            });
+            if (d.points.length > 5) {
+                const numLeft = d.points.length - 5;
+                label += `<br>... and ${numLeft} more`;
+            }
+
+            label += '</div></div>';
+            label += '</div>';
+            return label;
+        } else {
+            return 'No speakers';
+        }
+    }
+
+</script>
+<!--<button class="city-button" onclick="animateToLocation(28.6138954, 77.2090057)">Test Button</button>-->
+<div class="navbar nav-left nav-col nav--main">
+    <span id="heading">Does a Speaker's Birthplace Influence <br> the Popularity of Their TED Talks?</span>
+</div>
+<div class="cities-list">
+    <div class="city-header">
+        <h3>Top Cities by TED Talk Views</h3>
+        <h2>default</h2>
+    </div>
+    <ul>
+        <li>default</li>
+        <li>default</li>
+        <li>default</li>
+        <li>default</li>
+        <li>default</li>
+    </ul>
+    <button id="prev-continent">➤</button>
+    <button id="next-continent">➤</button>
+</div>
+<div class="speed-control">
+    <label for="rotateSpeed">Globe Rotation Speed</label>
+    <input type="range" id="rotateSpeed" min=0 max=1.0 step=0.01 value=0.01>
+</div>
+<script>
+    document.getElementById('rotateSpeed').addEventListener('input', function(e) {
+        world.controls().autoRotateSpeed = parseFloat(e.target.value);
+        // console.log("Rotate speed", e.target.value);
+    });
+</script>
+<script>
+    document.getElementById('next-continent').addEventListener('click', () => {
+        currentContinentIndex = (currentContinentIndex + 1) % continents.length;
+        updateCityList(continents[currentContinentIndex]);
+    });
+    document.getElementById('prev-continent').addEventListener('click', () => {
+        if (currentContinentIndex === 0) {
+            currentContinentIndex = continents.length - 1;
+        }
+        else {
+            currentContinentIndex = currentContinentIndex - 1;
+        }
+        updateCityList(continents[currentContinentIndex]);
+    });
+</script>
+<div class="arrow-container">
+    <a href="index.html" class="arrow-link">
+        ← Prev
+    </a>
+    <a href="scatterplot.html" class="arrow-link" style="margin-bottom: 20px">
+        Next →
+    </a>
+</div>
+</body>
