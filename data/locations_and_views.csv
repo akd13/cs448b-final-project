@@ -17,7 +17,7 @@ Aditi Shankardass,51.4893335,-0.1440550845276872,London,United Kingdom,957087,1
 Adora Svitak,44.0462362,-123.0220289,Springfield,United States,4782854,1
 Ahn Trio,32.7762719,-96.7968559,Dallas,United States,746852,1
 Aimee Mullins,40.6022059,-75.4712794,Allentown,United States,2179948,3
-Al Gore,38.8950368,-77.0365427,Washington,United States,1837906,4
+Al Gore,38.8950368,-77.0365427,Washington D.C,United States,1837906,4
 Al Seckel,40.7127281,-74.0060152,New York,United States,2138907,1
 Alaa Murabit,52.131802,-106.660767,Saskatoon,Canada,2312512,1
 Alain de Botton,47.3744489,8.5410422,Zurich,Switzerland,3996817,2
@@ -29,7 +29,7 @@ Alejandro Aravena,-33.4377756,-70.6504502,Santiago,Chile,1652993,1
 Alejandro Sánchez Alvarado,10.5060934,-66.9146008,Caracas,Venezuela,1059199,1
 Alex Kipman,-25.4295963,-49.2712724,Curitiba,Brazil,2224913,1
 Alex Steffen,37.8044557,-122.271356,Oakland,United States,1188374,2
-Alexa Meade,38.8950368,-77.0365427,Washington,United States,2682427,1
+Alexa Meade,38.8950368,-77.0365427,Washington D.C,United States,2682427,1
 Alexander Betts,51.4538022,-2.5972985,Bristol,United Kingdom,1627779,2
 Alexander Tsiaras,42.7656251,-71.4677032,Nashua,United States,6064898,1
 Alexander Wagner,52.5170365,13.3888599,Berlin,Germany,621431,1
@@ -44,7 +44,7 @@ Amanda Burden,40.7127281,-74.0060152,New York,United States,1061964,1
 Amanda Palmer,40.7127281,-74.0060152,New York,United States,9006600,1
 Amber Case,45.5202471,-122.674194,Portland,United States,1475333,1
 Amit Sood,23.2584857,77.401989,Bhopal,India,768146,2
-Amory Lovins,38.8950368,-77.0365427,Washington,United States,988514,2
+Amory Lovins,38.8950368,-77.0365427,Washington D.C,United States,988514,2
 Amos Winter,-43.530955,172.6364343,Christchurch,New Zealand,1004016,1
 Amy Lockwood,45.4208777,-75.6901106,(Old) Ottawa,Canada,834926,1
 Amy Purdy,36.1672559,-115.148516,Las Vegas,United States,1624184,1
@@ -168,7 +168,7 @@ Catherine Mohr,-45.8740984,170.5035755,Dunedin,New Zealand,723760,2
 Cesar Kuriyama,-12.0621065,-77.0365256,Lima Metropolitan Area,Peru,1666552,1
 Charity Tillemann-Dick,39.7392364,-104.984862,Denver,United States,521502,1
 Charles Anderson,38.6280278,-90.1910154,St. Louis,United States,553253,1
-Charles Fleischer,38.8950368,-77.0365427,Washington,United States,1055904,1
+Charles Fleischer,38.8950368,-77.0365427,Washington D.C,United States,1055904,1
 Charles Hazlewood,51.2912247,-0.2326709,Reigate and Banstead,United Kingdom,502832,1
 Charles Robertson,53.3493795,-6.2605593,Dublin,Ireland,1204089,1
 Chelsea Shields,40.2337289,-111.6587085,Provo,United States,1452861,1
@@ -178,8 +178,8 @@ Chip Conley,33.7500378,-117.8704931,Santa Ana,United States,2785058,1
 Chip Kidd,40.335345,-75.9279495,Reading,United States,1731531,2
 Chris Abani,5.8837902,7.9372068,Afikpo,Nigeria,702781,2
 Chris Anderson,51.5074456,-0.1277653,City of Westminster,United Kingdom,1371840,4
-Chris Anderson (TED),14.4853915,121.0326671,Parañaque,Philippines,659450,1
-Chris Bliss,38.8950368,-77.0365427,Washington,United States,713999,1
+Chris Anderson (TED),24.8546842,67.0207055,Karachi,Pakistan,659450,1
+Chris Bliss,38.8950368,-77.0365427,Washington D.C,United States,713999,1
 Chris Hadfield,42.9743821,-82.403533,Sarnia,Canada,4790701,1
 Chris Kluwe,39.9527237,-75.1635262,Philadelphia,United States,1194762,1
 Chris Milk,40.7127281,-74.0060152,New York,United States,1151937,2
@@ -304,7 +304,7 @@ Emiliano Salinas,19.4326296,-99.1331785,Mexico City,Mexico,525446,1
 Emily Levine,36.1622767,-86.7742984,Nashville-Davidson,United States,2049904,1
 Emily Oster,41.3082138,-72.9250518,New Haven,United States,854967,1
 Enric Sala,41.9793006,2.8199439,Girona,Spain,316507,1
-Enrique Peñalosa,38.8950368,-77.0365427,Washington,United States,871452,1
+Enrique Peñalosa,38.8950368,-77.0365427,Washington D.C,United States,871452,1
 Eric Lewis,39.9448402,-75.1198911,Camden,United States,544342,2
 Eric Liu,53.5462055,-113.491241,Edmonton,Canada,1295838,2
 Eric Topol,40.7135078,-73.8283132,New York,United States,710710,1
@@ -354,7 +354,7 @@ Grace Kim,34.0536909,-118.242766,Los Angeles,United States,1363680,1
 Grady Booch,35.2072185,-101.833824,Amarillo,United States,1362265,1
 Graham Hill,51.5565973,-0.1784251,London,United Kingdom,2919318,2
 Greg Stone,-31.9558933,115.8605855,Perth,Australia,454323,1
-Gregory Petsko,38.8950368,-77.0365427,Washington,United States,909508,1
+Gregory Petsko,38.8950368,-77.0365427,Washington D.C,United States,909508,1
 Grégoire Courtine,47.3215806,5.0414701,Dijon,France,926295,1
 Guillaume Néry,43.7009358,7.2683912,Nice,France,857839,1
 Guy Hoffman,45.4208777,-75.6901106,(Old) Ottawa,Canada,2931366,1
@@ -368,7 +368,7 @@ Hector Ruiz,28.7041725,-100.5148362,Piedras Negras,Mexico,315244,1
 Helen Czerski,53.4794892,-2.2451148,Manchester,United Kingdom,656791,1
 Henry Markram,-28.8166236,24.991639,Tokologo Local Municipality,South Africa,1180127,1
 Herbie Hancock,41.8755616,-87.6244212,Chicago,United States,652315,1
-His Holiness Pope Francis,31.6343083,74.8736788,Amritsar,India,2679881,1
+His Holiness Pope Francis,-34.6037,-58.3816,Buenos Aires,Argentina,2679881,1
 Hod Lipson,32.799313,34.989571715728204,Haifa,Israel,1212346,1
 Holly Morris,41.8755616,-87.6244212,Chicago,United States,1108528,1
 Honor Harger,-45.8740984,170.5035755,Dunedin,New Zealand,909194,1
@@ -400,7 +400,7 @@ Jaime Lerner,-25.4295963,-49.2712724,Curitiba,Brazil,596961,1
 Jake Barton,40.6526006,-73.9497211,New York,United States,780039,1
 Jake Wood,40.6639916,-74.2107006,Elizabeth,United States,485501,1
 James A. White Sr.,29.7589382,-95.3676974,Houston,United States,1237938,1
-James Flynn,38.8950368,-77.0365427,Washington,United States,2991225,1
+James Flynn,38.8950368,-77.0365427,Washington D.C,United States,2991225,1
 James Forbes,45.4208777,-75.6901106,(Old) Ottawa,Canada,204410,1
 James Green,42.3554334,-71.060511,Boston,United States,1465749,1
 James Howard Kunstler,40.7127281,-74.0060152,New York,United States,1683456,1
@@ -432,9 +432,9 @@ Jeff Bezos,35.0841034,-106.650985,Albuquerque,United States,707182,2
 Jeff Han,42.3315509,-83.0466403,Detroit,United States,4531020,1
 Jeff Skoll,45.5031824,-73.5698065,Montreal,Canada,727247,1
 Jeffrey Brown,42.3554334,-71.060511,Boston,United States,1049652,1
-Jehane Noujaim,38.8950368,-77.0365427,Washington,United States,387877,1
+Jehane Noujaim,38.8950368,-77.0365427,Washington D.C,United States,387877,1
 Jennifer 8. Lee,40.7127281,-74.0060152,New York,United States,1285775,1
-Jennifer Doudna,38.8950368,-77.0365427,Washington,United States,1936760,1
+Jennifer Doudna,38.8950368,-77.0365427,Washington D.C,United States,1936760,1
 Jennifer Granholm,49.2608724,-123.113952,Vancouver,Canada,745252,1
 Jennifer Lin,29.7589382,-95.3676974,Houston,United States,1628912,1
 Jer Thorp,49.2608724,-123.113952,Vancouver,Canada,220716,1
@@ -484,7 +484,7 @@ Jorge Ramos,-34.9058916,-56.1913095,Montevideo,Uruguay,383080,1
 Jorge Soto,-17.0568696,-64.9912286,Municipio Puerto Villarroel,Bolivia,1213251,1
 Joseph Redmon,-36.852095,174.7631803,Auckland,New Zealand,1164777,1
 Josh Luber,39.9527237,-75.1635262,Philadelphia,United States,1799799,1
-Joshua Foer,38.8950368,-77.0365427,Washington,United States,4754217,1
+Joshua Foer,38.8950368,-77.0365427,Washington D.C,United States,4754217,1
 Joshua Prager,40.7127281,-74.0060152,New York,United States,1436084,2
 Joshua Smith,47.6038321,-122.330062,Seattle,United States,893022,1
 José Antonio Abreu,9.3148173,-70.6081655,Valera,Venezuela,942604,1
@@ -538,7 +538,7 @@ Lee Cronin,53.3493795,-6.2605593,Dublin,Ireland,840715,2
 Lee Smolin,40.7127281,-74.0060152,New York,United States,258922,1
 Lemon Andersen,40.6526006,-73.9497211,New York,United States,1120276,1
 Leonard Susskind,40.7127281,-74.0060152,New York,United States,846544,1
-Leslie Morgan Steiner,38.8950368,-77.0365427,Washington,United States,3846779,1
+Leslie Morgan Steiner,38.8950368,-77.0365427,Washington D.C,United States,3846779,1
 Leslie T. Chang,40.7127281,-74.0060152,New York,United States,1362071,1
 Lewis Pugh,50.3714122,-4.1424451,Plymouth,United Kingdom,859331,2
 Lian Pin Koh,1.357107,103.8194992,Singapore,Singapore,599368,1
@@ -548,7 +548,7 @@ Linus Torvalds,60.1674881,24.9427473,Helsinki,Finland,2399273,1
 Lisa Bu,52.5170365,13.3888599,Berlin,Germany,3158067,1
 Lisa Kristine,37.7790262,-122.419906,San Francisco,United States,2586606,1
 Liu Bolin,36.398987,118.5055691,Linqu County,China,1304597,1
-Liza Donnelly,38.8950368,-77.0365427,Washington,United States,1300622,1
+Liza Donnelly,38.8950368,-77.0365427,Washington D.C,United States,1300622,1
 Lord Nicholas Stern,51.4893335,-0.1440550845276872,London,United Kingdom,773801,1
 Louie Schwartzberg,40.6526006,-73.9497211,New York,United States,4186569,3
 Louise Leakey,-1.30261485,36.82884201813725,Nairobi,Kenya,656400,1
@@ -605,7 +605,7 @@ Melissa Walker,53.5462055,-113.491241,Edmonton,Canada,827933,1
 Mellody Hobson,41.8755616,-87.6244212,Chicago,United States,2200326,1
 Memory Banda,-31.5639055,28.7933032,Mthatha,South Africa,1241223,1
 Meron Gribetz,30.8124247,34.8594762,Ramat Negev Regional Council,Israel,1575381,1
-Michael Anti,25.24475795,55.17926285998681,Dubai,United Arab Emirates,1423930,1
+Michael Anti,32.0584,118.7965,Nanjing, China,1423930,1
 Michael Bierut,41.4996574,-81.6936772,Cleveland,United States,1323235,1
 Michael Botticelli,42.3554334,-71.060511,Boston,United States,1247655,1
 Michael Murphy,34.0536909,-118.242766,Los Angeles,United States,1162011,1
@@ -614,7 +614,7 @@ Michael Patrick Lynch,50.8214626,-0.1400561,Brighton,United Kingdom,1264166,1
 Michael Rubinstein,40.7127281,-74.0060152,New York,United States,1948196,1
 Michael Sandel,44.9772995,-93.2654692,Minneapolis,United States,1079617,3
 Michael Shermer,34.0536909,-118.242766,Los Angeles,United States,3896798,2
-Michael Stevens,38.8950368,-77.0365427,Washington,United States,195899,1
+Michael Stevens,38.8950368,-77.0365427,Washington D.C,United States,195899,1
 Michael Tilson Thomas,34.0536909,-118.242766,Los Angeles,United States,1281099,1
 Michelle Obama,41.8755616,-87.6244212,Chicago,United States,1026589,1
 Mick Cornett,35.4729886,-97.5170536,Oklahoma City,United States,1514912,1
@@ -679,7 +679,7 @@ Olafur Eliasson,55.6867243,12.5700724,Copenhagen,Denmark,522578,1
 Ole Scheeren,49.0068705,8.4034195,Karlsruhe,Germany,2079266,1
 Oliver Sacks,51.4893335,-0.1440550845276872,London,United Kingdom,4233352,1
 Paddy Ashdown,28.6138954,77.2090057,New Delhi,India,986648,1
-Pamela Meyer,38.8950368,-77.0365427,Washington,United States,16861578,1
+Pamela Meyer,38.8950368,-77.0365427,Washington D.C,United States,16861578,1
 Pankaj Ghemawat,26.2967719,73.0351433,Jodhpur,India,813261,1
 Paola Antonelli,40.7232643,8.5610074,Sassari,Italy,610986,3
 Parag Khanna,26.4609135,80.3217588,Kanpur,India,919310,2
@@ -700,7 +700,7 @@ Paul Romer,33.9510011,-118.2062682,South Gate,United States,516887,2
 Paul Root Wolpe,32.7884363,-79.9399309,Charleston,United States,1226731,1
 Paul Sereno,41.7571701,-88.3147539,Aurora,United States,764982,1
 Paul Tudor Jones II,35.1460249,-90.0517638,Memphis,United States,1762082,1
-Paula Scher,38.8950368,-77.0365427,Washington,United States,505714,1
+Paula Scher,38.8950368,-77.0365427,Washington D.C,United States,505714,1
 Pavan Sukhdev,28.6273928,77.1716954,New Delhi,India,633715,1
 Peggy Orenstein,44.9772995,-93.2654692,Minneapolis,United States,1750573,1
 Peter Attia,43.6534817,-79.3839347,Old Toronto,Canada,2459753,1
@@ -711,7 +711,7 @@ Peter Haas,49.5928616,11.0056,Erlangen,Germany,317127,1
 Peter Saul,39.2908816,-76.610759,Baltimore,United States,873230,1
 Peter Singer,-37.8142454,144.9631732,Melbourne,Australia,1533054,1
 Peter van Uhm,51.8474946,5.8637771,Nijmegen,Netherlands,1818344,1
-Phil Plait,38.8950368,-77.0365427,Washington,United States,2042272,1
+Phil Plait,38.8950368,-77.0365427,Washington D.C,United States,2042272,1
 Philip K. Howard,33.7489924,-84.3902644,Atlanta,United States,610454,1
 Philip Rosedale,32.7174202,-117.1627728,San Diego,United States,554794,1
 Philip Zimbardo,40.7127281,-74.0060152,New York,United States,3204454,3
@@ -815,7 +815,7 @@ Shawn Achor,31.5491899,-97.1474628,Waco,United States,16209727,1
 Sheena Iyengar,43.6534817,-79.3839347,Old Toronto,Canada,2700983,2
 Sherry Turkle,40.7127281,-74.0060152,New York,United States,4066376,1
 Sherwin Nuland,40.7127281,-74.0060152,New York,United States,924760,2
-Sheryl Sandberg,38.8950368,-77.0365427,Washington,United States,4782139,2
+Sheryl Sandberg,38.8950368,-77.0365427,Washington D.C,United States,4782139,2
 Sheryl WuDunn,40.7127281,-74.0060152,New York,United States,1049847,1
 Shigeru Ban,35.6840574,139.7744912,Chuo,Japan,1573440,1
 Shilo Shiv Suleman,12.9767936,77.590082,Bengaluru,India,576918,1
@@ -904,7 +904,7 @@ Tom Wujec,49.8955367,-97.1384584,Winnipeg,Canada,1997689,4
 Tomás Saraceno,-26.8303703,-65.2038133,San Miguel de Tucumán,Argentina,248411,1
 Tony Fadell,42.3315509,-83.0466403,Detroit,United States,2006050,1
 Tony Robbins,34.0536909,-118.242766,Los Angeles,United States,20685401,1
-Tracy Chevalier,38.8950368,-77.0365427,Washington,United States,1191702,1
+Tracy Chevalier,38.8950368,-77.0365427,Washington D.C,United States,1191702,1
 Travis Kalanick,34.0536909,-118.242766,Los Angeles,United States,1587546,1
 Tristram Stuart,51.5074456,-0.1277653,City of Westminster,United Kingdom,1471114,1
 Trita Parsi,31.3230637,48.67932,Ahwaz,Iran,740772,1
