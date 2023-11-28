@@ -2,10 +2,19 @@
 /**********************/
 
 var selectedAttribute = 'Funny'
-const attributes = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
-const select = d3.select("#attribute-selector");
-select.selectAll("option")
-    .data(attributes)
+const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
+const select_rating = d3.select("#attribute-selector-rating");
+select_rating.selectAll("option")
+    .data(attributes_rating)
+    .enter()
+    .append("option")
+    .text(d => d)
+    .attr("value", d => d);
+
+const attributes_location = ['Americas', "Europe"]
+const select_location = d3.select("#attribute-selector-location");
+select_location.selectAll("option")
+    .data(attributes_location)
     .enter()
     .append("option")
     .text(d => d)
@@ -24,7 +33,7 @@ const margin = {top: 50, right: 90, bottom: 50, left: 90}, width = 960 - margin.
 
 /* Dropdown Selection */
 /**********************/
-select.on('change', function() {
+select_rating.on('change', function() {
     const selectedAttribute = d3.select(this).property('value');
     console.log(selectedAttribute);
     updatePlot(selectedAttribute);
@@ -41,7 +50,7 @@ function updatePlot(selectedAttribute) {
 
     d3.csv("data/americas.csv").then(function (data) {
         data.forEach(function (d) {
-            attributes.forEach(attr => {
+            attributes_rating.forEach(attr => {
                 d[attr] = +d[attr];
             });
             d.views = +d.views;
