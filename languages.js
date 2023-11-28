@@ -187,7 +187,7 @@ d3.csv("years-clean.csv").then(function (data) {
 
   var simulation = d3
     .forceSimulation(data)
-    .force("charge", d3.forceManyBody().strength(0))
+    .force("charge", d3.forceManyBody().strength(-0.5))
     .force("center", d3.forceCenter(750, 400))
     .force(
       "collision",
