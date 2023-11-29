@@ -11,6 +11,8 @@ select_rating.selectAll("option")
     .text(d => d)
     .attr("value", d => d);
 
+
+var selectedLocation = 'Americas'
 const attributes_location = ['Americas', "Europe"]
 const select_location = d3.select("#attribute-selector-location");
 select_location.selectAll("option")
@@ -39,16 +41,31 @@ select_rating.on('change', function() {
     updatePlot(selectedAttribute);
 });
 
-updatePlot(selectedAttribute);
+select_location.on('change', function() {
+    const selectedLocation = d3.select(this).property('value');
+    console.log(selectedLocation);
+    updatePlot(selectedAttribute, selectedLocation);
+});
+
+updatePlot(selectedAttribute, selectedLocation);
+
+
 
 
 /*     Create SVG       */
 /**********************/
 
-function updatePlot(selectedAttribute) {
+function updatePlot(selectedAttribute, selectedLocation) {
+    
+    var location_data;
+    if (selectedLocation == 'Americas') {
+        location_data = 'data/americas.csv';
+    }
+    else {
+        location_data = 'data/europe.csv';
+    }
 
-
-    d3.csv("data/americas.csv").then(function (data) {
+    d3.csv(location_data).then(function (data) {
         data.forEach(function (d) {
             attributes_rating.forEach(attr => {
                 d[attr] = +d[attr];
@@ -74,8 +91,9 @@ function updatePlot(selectedAttribute) {
             })])
             .range([height, 0]);
         
+        svg.select(".axes.y").remove();
         svg.append("g")
-            .attr("class", "axes")
+            .attr("class", "axes y")
             .call(d3.axisLeft(y));
 
         var circles = svg.selectAll("circle")
@@ -118,8 +136,9 @@ function updatePlot(selectedAttribute) {
             .text(selectedAttribute)
             .style("fill", "white");
             
+        svg.select(".label-y").remove();
         svg.append("text")
-            .attr("class", "label")
+            .attr("class", "label-y")
             .attr("text-anchor", "end")
             .attr("transform", "rotate(-90)")
             .attr("x", -margin.top - height / 2 + 80)
