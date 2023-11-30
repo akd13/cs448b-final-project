@@ -152,7 +152,7 @@ d3.csv("data/years-clean.csv").then(function (data) {
     .select("#viz1-svg")
     .append("svg")
     .attr("width", '100vw')
-    .attr("height", '100vh');
+    .attr("height", '90vh');
 
   var myColor = d3.scaleLinear().domain([1, 72]).range(["#CFFFF4", "#0E2720"]);
 
@@ -186,11 +186,11 @@ d3.csv("data/years-clean.csv").then(function (data) {
     const element = document.getElementById('viz1');
     const rect = element.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    const centerY = -50 + rect.top + rect.height / 2;
 
     var simulation = d3
     .forceSimulation(data)
-    .force("charge", d3.forceManyBody().strength(-0.15))
+    .force("charge", d3.forceManyBody().strength(-0.5))
     .force("center", d3.forceCenter(centerX, centerY))
     .force(
       "collision",
