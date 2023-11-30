@@ -52,6 +52,27 @@
     background: #050404;
 }
 
+.keyboard-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+}
+
+#keyboard-navigation {
+    display: inline-block;
+    margin-right: 10px;
+    color: white;
+}
+
+.arrow-keys {
+    display: inline-block;
+}
+
+.arrow-key {
+    background-color: white;
+}
+
 /*Viz 2*/
 body {
     margin: 0;

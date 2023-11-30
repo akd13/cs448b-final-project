@@ -198,6 +198,19 @@
         updateCityList(continents[currentContinentIndex]);
     });
 </script>
+<script>
+    // navigate left and right
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+        window.location.href = 'scatterplot.html';
+    }
+});
+document.addEventListener('keyup', function(event) {
+    if (event.key === 'ArrowLeft') {
+        window.location.href = 'index.html';
+    }
+});
+</script>
 <div class="arrow-container">
     <a href="index.html" class="arrow-link" style="left: 10px;">
         ← Prev

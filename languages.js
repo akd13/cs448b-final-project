@@ -152,7 +152,7 @@ d3.csv("data/years-clean.csv").then(function (data) {
     .select("#viz1-svg")
     .append("svg")
     .attr("width", '100vw')
-    .attr("height", '90vh');
+    .attr("height", '100vh');
 
   var myColor = d3.scaleLinear().domain([1, 72]).range(["#CFFFF4", "#0E2720"]);
 
@@ -200,4 +200,11 @@ d3.csv("data/years-clean.csv").then(function (data) {
       val = undefined;
       ticked(val);
     });
+});
+
+// navigate left and right
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+        window.location.href = 'birthplaces.html';
+    }
 });
