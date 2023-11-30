@@ -2,6 +2,7 @@
 #viz1 {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
+    overflow: scroll;
 }
 
 #viz1-heading {
@@ -38,6 +39,16 @@
 
 .text {
     font-family: "Karla", "sans-serif";
+}
+
+#arrow-svg1 {
+    text-decoration: none;
+    margin: 0 10px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
 }
 
 /*Viz 2*/
@@ -194,16 +205,13 @@ body {
 
 .arrow-container {
     position: absolute;
-    top: 80%;
+    top: 52.5%;
     transform: translateY(-50%);
-    display: flex;
-    justify-content: space-between;
     width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
 }
 
 .arrow-link {
+    position: absolute;
     text-decoration: none;
     margin: 0 10px;
     color: white;
