@@ -201,17 +201,3 @@ d3.csv("data/years-clean.csv").then(function (data) {
       ticked(val);
     });
 });
-
-
-function getCenter() {
-    const element = document.getElementById('viz1');
-    const centerX = 1000;
-    const centerY = 400;
-    if (element) {
-        const rect = element.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-    }
-    return [centerX, centerY];
-}
-
