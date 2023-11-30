@@ -1,4 +1,14 @@
 
+var selectedCountry = 'Choose a country'
+const attributes_country = ['Choose a country', 'Afghanistan', 'Albania', 'Algeria', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bangladesh','Belarus','Belgium', 'Bolivia', 'Bosnia and Herzegovina', 'Brazil', 'Bulgaria', 'Cameroon', 'Canada', 'Chile', 'China', 'Colombia', 'Costa Rica', 'Cuba', 'Czech Republic', 'Denmark', 'Egypt', 'Ethiopia', 'Finland', 'France', 'Germany', 'Ghana', 'Greece', 'Guatemala', 'Haiti', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Japan', 'Jordan', 'Kenya', 'Kiribati', 'Latvia', 'Lebanon', 'Liberia', 'Malaysia', 'Mexico', 'Morocco', 'Netherlands', 'New Zealand', 'Nigeria', 'Norway', 'Pakistan', 'Palestine', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Russia', 'Serbia', 'Singapore', 'Somalia', 'South Africa', 'South Korea', 'Spain', 'Sudan', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Thailand', 'Uganda', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Venezuela', 'Zimbabwe' ];
+const select_country = d3.select("#attribute-selector-country");
+select_country.selectAll("option")
+    .data(attributes_country)
+    .enter()
+    .append("option")
+    .text(d => d)
+    .attr("value", d => d);
+
 function Legend(color, {
     title,
     tickSize = 6,
@@ -142,11 +152,13 @@ function Legend(color, {
   }
 
 
-d3.csv("data/years-clean.csv").then(function (data) {
-    const legend = Legend(d3.scaleSqrt([1, 60], ["#ffffff", "#0E2720"]), {
+d3.csv("data/ted_speakers_birth.csv").then(function (data) {
+    /*
+    const legend = Legend(d3.scaleSqrt([1, 60], ['FD6868', "#0E2720"]), {
         title: "Number of Languages ->"
     })
     d3.select("#viz1-svg").node().appendChild(legend);
+    */
 
   const svg = d3
     .select("#viz1-svg")
@@ -154,9 +166,9 @@ d3.csv("data/years-clean.csv").then(function (data) {
     .attr("width", '100vw')
     .attr("height", '100vh');
 
-  var myColor = d3.scaleLinear().domain([1, 72]).range(["#CFFFF4", "#0E2720"]);
+  var myColor = d3.scaleLinear().domain([1, 72]).range(["#FF7676", "#461313"]);
 
-  function ticked(val) {
+  function ticked(selectedCountry) {
     svg
       .selectAll("circle")
       .data(data)
@@ -170,23 +182,33 @@ d3.csv("data/years-clean.csv").then(function (data) {
       })
       .attr("cx", (d) => d.x)
       .attr("cy", (d) => d.y)
-      .attr("fill", (d) => myColor(d.languages))
+      .attr("fill", (d) => {
+        if (selectedCountry === 'Choose a country' || d.country === selectedCountry) {
+            return myColor(d.languages);
+        } else {
+            return "gray"; 
+        }
+      })
       .append("title")
       .text(
         (d) =>
-          `Speaker & Title: ${d.name} \n
-           Views: ${d.views} \n
-           Comments: ${d.comments} \n
+          `Views: ${d.views} \n
            Languages: ${d.languages} \n
-           Event: ${d.event} 
           `
       );
   }
 
+  select_country.on('change', function() {
+    selectedCountry = d3.select(this).property('value');
+    console.log(selectedCountry);
+    ticked(selectedCountry)
+});
+ 
     const element = document.getElementById('viz1');
     const rect = element.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = -50 + rect.top + rect.height / 2;
+    
 
     var simulation = d3
     .forceSimulation(data)
@@ -197,8 +219,7 @@ d3.csv("data/years-clean.csv").then(function (data) {
       d3.forceCollide().radius((d) => d.views / 210000)
     )
     .on("tick", function () {
-      val = undefined;
-      ticked(val);
+      ticked(selectedCountry);
     });
 });
 
