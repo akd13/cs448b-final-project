@@ -1,3 +1,46 @@
+/*Viz 1*/
+#viz1 {
+    background-image: url("images/night-sky.png");
+    font-family: "Karla", "sans-serif";
+}
+
+#viz1-heading {
+    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    transform: translateY(30%);
+    pointer-events: none !important;
+    cursor: pointer;
+    text-align: center;
+    color: #fcdcbf;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#viz1-svg {
+    display: block;
+}
+
+.axes {
+    color: white;
+}
+
+.title {
+    position: absolute;
+    padding: 5px;
+    border-radius: 5px;
+    pointer-events: none;
+    font-size: 12px;
+    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    line-height: 28px;
+    color: #fcdcbf;
+}
+
+.text {
+    font-family: "Karla", "sans-serif";
+}
+
+/*Viz 2*/
 body {
     margin: 0;
     padding: 0;
@@ -166,25 +209,7 @@ body {
     color: white;
 }
 
-#viz1 {
-    background-image: url("images/night-sky.png");
-    font-family: "Karla", "sans-serif";
-}
-
-#viz1-heading {
-    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
-    font-size: 30px;
-    font-weight: 400;
-    transform: translateY(30%);
-    pointer-events: none !important;
-    cursor: pointer;
-    text-align: center;
-    color: #fcdcbf;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-
-
+/*Viz 3*/
 #viz3 {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
@@ -205,27 +230,3 @@ body {
 /*#viz3-svg {*/
 /*    transform: translateY(10%);*/
 /*}*/
-
-.axes {
-    color: white;
-}
-
-#text-anchor {
-    font-color: white;
-}
-
-.title {
-    position: absolute;
-    padding: 5px;
-    border-radius: 5px;
-    pointer-events: none;
-    font-size: 12px;
-    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
-    font-weight: 400;
-    line-height: 28px;
-    color: #fcdcbf;
-}
-
-.text {
-    font-family: "Karla", "sans-serif";
-}

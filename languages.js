@@ -2,7 +2,7 @@
 function Legend(color, {
     title,
     tickSize = 6,
-    width = 320, 
+    width = 320,
     height = 44 + tickSize,
     marginTop = 18,
     marginRight = 0,
@@ -142,7 +142,7 @@ function Legend(color, {
   }
 
 
-d3.csv("years-clean.csv").then(function (data) {
+d3.csv("data/years-clean.csv").then(function (data) {
     const legend = Legend(d3.scaleSqrt([1, 60], ["#ffffff", "#0E2720"]), {
         title: "Number of Languages ->"
     })
@@ -151,8 +151,8 @@ d3.csv("years-clean.csv").then(function (data) {
   const svg = d3
     .select("#viz1-svg")
     .append("svg")
-    .attr("width", 1500)
-    .attr("height", 800);
+    .attr("width", '100vw')
+    .attr("height", '100vh');
 
   var myColor = d3.scaleLinear().domain([1, 72]).range(["#CFFFF4", "#0E2720"]);
 
@@ -183,12 +183,15 @@ d3.csv("years-clean.csv").then(function (data) {
       );
   }
 
- 
+    const element = document.getElementById('viz1');
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
 
-  var simulation = d3
+    var simulation = d3
     .forceSimulation(data)
-    .force("charge", d3.forceManyBody().strength(-0.5))
-    .force("center", d3.forceCenter(750, 400))
+    .force("charge", d3.forceManyBody().strength(-0.15))
+    .force("center", d3.forceCenter(centerX, centerY))
     .force(
       "collision",
       d3.forceCollide().radius((d) => d.views / 210000)
