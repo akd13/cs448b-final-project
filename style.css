@@ -2,7 +2,7 @@
 #viz1 {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
-    overflow: scroll;
+    overflow: hidden; /* Enable scroll if needed */
 }
 
 #viz1-heading {
@@ -49,6 +49,7 @@
     top: 50%;
     transform: translateY(-50%);
     right: 10px;
+    background: #050404;
 }
 
 /*Viz 2*/
@@ -221,13 +222,14 @@ body {
 #viz3 {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
+    overflow: hidden;
 }
 
 #viz3-heading {
     font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
     font-size: 30px;
     font-weight: 400;
-    transform: translateY(30%);
+    transform: translateY(20%);
     pointer-events: none !important;
     cursor: pointer;
     text-align: center;
@@ -235,6 +237,24 @@ body {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+#selectors-viz3 {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    background-color: rgba(5, 4, 4, 0.51);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#attribute-selector-rating,
+#attribute-selector-location {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    width: 150px;
+    font-family: "Karla", "sans-serif";
+    font-size: medium;
+}
 /*#viz3-svg {*/
 /*    transform: translateY(10%);*/
 /*}*/

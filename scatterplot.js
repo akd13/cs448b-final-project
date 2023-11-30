@@ -1,3 +1,12 @@
+/* Margins */
+/***********/
+const container = d3.select("#viz3").node();
+const containerWidth = container.getBoundingClientRect().width;
+const containerHeight = container.getBoundingClientRect().height;
+const margin = {top: 50, right: 90, bottom: 50, left: 90}
+const width = containerWidth - margin.left*3 - margin.right*3;
+const height = containerHeight - margin.top*3 - margin.bottom*3;
+
 /*   Dropdown Button   */
 /**********************/
 
@@ -22,10 +31,6 @@ select_location.selectAll("option")
     .text(d => d)
     .attr("value", d => d);
 
-
-const margin = {top: 50, right: 90, bottom: 50, left: 90}, width = 960 - margin.left - margin.right,
-        height = 650 - margin.top - margin.bottom;
-
     var svg = d3.select("#viz3-svg")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -36,21 +41,18 @@ const margin = {top: 50, right: 90, bottom: 50, left: 90}, width = 960 - margin.
 /* Dropdown Selection */
 /**********************/
 select_rating.on('change', function() {
-    const selectedAttribute = d3.select(this).property('value');
+    selectedAttribute = d3.select(this).property('value');
     console.log(selectedAttribute);
-    updatePlot(selectedAttribute);
+    updatePlot(selectedAttribute, selectedLocation);
 });
 
 select_location.on('change', function() {
-    const selectedLocation = d3.select(this).property('value');
+    selectedLocation = d3.select(this).property('value');
     console.log(selectedLocation);
     updatePlot(selectedAttribute, selectedLocation);
 });
 
 updatePlot(selectedAttribute, selectedLocation);
-
-
-
 
 /*     Create SVG       */
 /**********************/
@@ -58,7 +60,7 @@ updatePlot(selectedAttribute, selectedLocation);
 function updatePlot(selectedAttribute, selectedLocation) {
     
     var location_data;
-    if (selectedLocation == 'Americas') {
+    if (selectedLocation === 'Americas') {
         location_data = 'data/americas.csv';
     }
     else {
@@ -90,7 +92,7 @@ function updatePlot(selectedAttribute, selectedLocation) {
                 return d.views;
             })])
             .range([height, 0]);
-        
+
         svg.select(".axes.y").remove();
         svg.append("g")
             .attr("class", "axes y")
