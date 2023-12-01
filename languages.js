@@ -216,7 +216,7 @@ d3.csv("data/ted_speakers_birth.csv").then(function (data) {
     .force("center", d3.forceCenter(centerX, centerY))
     .force(
       "collision",
-      d3.forceCollide().radius((d) => d.views / 210000)
+      d3.forceCollide().radius((d) => d.views / 230000)
     )
     .on("tick", function () {
       ticked(selectedCountry);
