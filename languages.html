@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualisation 1</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  </head>
+  <body id="viz1">
+    <div id="languages"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <div id="viz1-svg">
+      <h2 id="viz1-heading">
+        Does number of languages a talk is available in influence views?
+      </h2>
+    <select id="attribute-selector-country"></select>
+    </div>
+    <script src="languages.js"></script>
+    <div id="viz1-legend"></div>
+    <script>
+        // navigate left and right
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowRight') {
+            window.location.href = 'birthplaces.html';
+        }
+    });
+    document.addEventListener('keyup', function(event) {
+        if (event.key === 'ArrowLeft') {
+            window.location.href = 'index.html';
+        }
+    });
+    </script>
+    <div class="arrow-container">
+        <a href="index.html" class="arrow-link" style="left: 10px;">
+            ← Prev
+        </a>
+        <a href="birthplaces.html" class="arrow-link" style="right: 10px;">
+            Next →
+        </a>
+    </div>
+  </body>
+</html>
