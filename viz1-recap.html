@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  </head>
+  <body id="text-page">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+      <h2 id="text-page-heading">
+      </h2>
+      <p id="text-page-content">
+        From the previous visualization, we see that some very popular talks are available in more languages than the average 
+        talk, but so are some talks that are not as popular. We also see that most talks are available in around 10 languages.
+        Another factor to consider is when languages were added for a talk, was it immediately after it was released or once it 
+        started to gain some popularity? We unfortunately cannot answer this as we do not have the data for this. <br> <br>
+
+
+        The country filter, however, shows us the stark difference in the birthplace of speakers. Not just this, but the talks 
+        of speakers from smaller, lesser known countries are not as popular as ones from bigger, more well known countries. 
+        But what about what things look at a more micro level? At the city level instead of the country. <br> <br>
+
+        Our next visualization provides us with information at the city level. The longer the red bar is, the more average views 
+        talks of speakers born in those cities have. <br> <br>
+
+      </p>
+      <script>
+        // navigate left and right
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowRight') {
+            window.location.href = 'birthplaces.html';
+        }
+    });
+    document.addEventListener('keyup', function(event) {
+        if (event.key === 'ArrowLeft') {
+            window.location.href = 'languages.html';
+        }
+    });
+    </script>
+    <div class="arrow-container">
+        <a href="languages.html" class="arrow-link" style="left: 10px;">
+            ← Prev
+        </a>
+        <a href="birthplaces.html" class="arrow-link" style="right: 10px;">
+            Next →
+        </a>
+    </div>
+  </body>
+</html>
