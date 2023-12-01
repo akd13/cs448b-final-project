@@ -3,33 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Visualisation 1</title>
+    <title>Home</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
   </head>
-  <body id="viz1">
-    <div id="languages"></div>
+  <body id="text-page">
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <div id="viz1-svg">
-      <h2 id="viz1-heading">
-        Does number of languages a talk is available in influence views?
+      <h2 id="text-page-heading">
+        What makes TED talks popular?
       </h2>
-    <select id="attribute-selector-country"></select>
-    </div>
-    <script src="languages.js"></script>
-    <div id="viz1-legend"></div>
+      <p id="text-page-content">
+        Over the past decade and a half or so, TED talks have increasingly grown in popularity. 
+        With the most popular TED talk of all times, having more than 76 million views. We are 
+        looking to understand what makes TED talks popular (for the purposes of this article, we will refer to a talk as more 
+        popular if it has more views). <br> <br>
+
+        To answer our question, we will be guiding you through three different interactive visualizations, each one digging a 
+        little deeper into what factors contribute to the popularity of TED talks over time. <br> <br>
+
+        The dataset we have chosen has information about over 2400+ TED talks from 2006-2017. <br> <br>
+
+        TED talks across the globe are originally recorded in English, but captions can be provided in multiple languages and for some talks in our data, 
+        this number is as high as 66. This makes us wonder if there is a correlation between the number of languages a TED talk is 
+        available in and its popularity? <br> <br>
+
+        Our first visualization looks at this question - the bigger the radius of the circle, the more views a talk has and the darker the 
+        color of the circle, the more languages it is available in. The speakers in our dataset are global citizens, hailing from 84 
+        unique countries, and therefore, we also allow filtering by birthplace of the speaker of the talk for those interested in the 
+        granularities.
+
+      </p>
+      <script>
+        // navigate right
+    document.addEventListener('keyup', function(event) {
+        if (event.key === 'ArrowRight') {
+            window.location.href = 'languages.html';
+        }
+    });
+    </script>
+    <div class="keyboard-container">
+        <p id="keyboard-navigation">Use the keyboard to navigate</p>
+        <div class="arrow-keys">
+          <span class="arrow-key">&#8592;</span>
+          <span class="arrow-key">&#8594;</span>
+        </div>
+      </div>
     <div class="arrow-container">
-        <a href="birthplaces.html" class="arrow-link" style="right: 10px;">
+        <a href="languages.html" class="arrow-link" style="right: 10px;">
             Next →
         </a>
-      <br>
-    </div>
-    <div class="keyboard-container">
-      <p id="keyboard-navigation">Use the keyboard to navigate</p>
-      <div class="arrow-keys">
-        <span class="arrow-key">&#8592;</span>
-        <span class="arrow-key">&#8594;</span>
-      </div>
     </div>
   </body>
 </html>
