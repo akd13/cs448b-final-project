@@ -40,10 +40,11 @@
 }
 
 #text-page-content {
+    /*margin: 6%;*/
     font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
     font-size: 24px;
     font-weight: 400;
-    transform: translateY(30%);
+    transform: translateY(20%);
     pointer-events: none !important;
     cursor: pointer;
     text-align: center;
@@ -259,7 +260,7 @@ body {
 
 .arrow-container {
     position: absolute;
-    top: 52.5%;
+    bottom: 3%;
     transform: translateY(-50%);
     width: 100%;
 }
@@ -267,7 +268,7 @@ body {
 .arrow-link {
     position: absolute;
     text-decoration: none;
-    margin: 0 10px;
+    margin: 0 5px;
     color: white;
 }
 
