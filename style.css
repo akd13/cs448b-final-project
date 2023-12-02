@@ -40,16 +40,31 @@
 }
 
 #text-page-content {
-    /*margin: 6%;*/
+    margin: 4%;
     font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
     font-size: 24px;
     font-weight: 400;
-    transform: translateY(20%);
+    /*transform: translateY(5%);*/
     pointer-events: none !important;
     cursor: pointer;
     text-align: center;
-    color: #FAF0E6;
+    color: rgba(252, 220, 191, 0.82);
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#text-page-content {
+    animation: fadeInUp 1s ease-out;
 }
 
 .axes {
