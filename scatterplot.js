@@ -61,13 +61,8 @@ function updatePlot() {
 // Update Circles
 function updateCircles(data) {
     var circles = scatter.selectAll("circle").data(data);
-    circles
-        .append('title')
-        .text(d => {
-            console.log(d,"Add title");
-            return `${d.main_speaker}: ${d.city}`
-        });
-    circles.enter().append("circle")
+
+    var enterCircles = circles.enter().append("circle")
         .merge(circles)
         .attr("r", 4)
         .style("fill", "rgb(255,0,0)")
@@ -80,10 +75,21 @@ function updateCircles(data) {
             //remove tooltip
             d3.select(this).attr('stroke', null);
         })
+
+        circles.merge(enterCircles)
         .transition()
         .duration(1000)
         .attr("cx", d => xAxis(d[selectedAttribute]))
         .attr("cy", d => yAxis(d.views));
+
+
+    // Add title to both entered and updated circles
+    enterCircles.append('title')
+        .text(d => `${d.main_speaker}: ${d.city}`);
+
+    circles.select('title')
+        .text(d => `${d.main_speaker}: ${d.city}`);
+
     circles.exit().remove();
 }
 
