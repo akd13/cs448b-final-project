@@ -1,24 +1,46 @@
 // Configuration and Setup
 const container = d3.select("#viz3").node();
-const margin = { top: 50, right: 90, bottom: 50, left: 90 };
+const margin = { top: 50, right: 120, bottom: 50, left: 120 };
 const width = container.getBoundingClientRect().width - margin.left * 3 - margin.right * 3;
 const height = container.getBoundingClientRect().height - margin.top * 3 - margin.bottom * 3;
 const svg = d3.select("#viz3-svg").append("svg")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-              .attr("transform", `translate(${margin.left}, ${margin.top})`);
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 const xAxis = d3.scaleLinear().range([0, width]);
 const yAxis = d3.scaleLinear().range([height, 0]);
 const xAxisGroup = svg.append("g").attr("class", "axes x").attr("transform", `translate(0, ${height})`);
+// Append X Axis label
+svg.append("text")
+    .attr("class", "x-axis-label")
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom-20) + ")")
+    .attr("dy", "0.75em")
+    .style("text-anchor", "middle")
+    .style("fill", "#fcdcbf")
+    .style("font-size", "20px")
+    .style("font-family", "Karla; sans-serif")
+    .text(selectedAttribute);
 const yAxisGroup = svg.append("g").attr("class", "axes y");
+// Append Y Axis label
+svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left + 50)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "0.5em")
+    .style("text-anchor", "middle")
+    .style("fill", "#fcdcbf")
+    .style("font-size", "20px")
+    .style("font-family", "Karla; sans-serif")
+    .text("Views");
+
 // Define clip-path
 svg.append("clipPath")
-   .attr("id", "clip")
-   .append("rect")
-   .attr("width", width)
-   .attr("height", height);
+    .attr("id", "clip")
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height);
 const scatter = svg.append('g').attr("clip-path", "url(#clip)");
 
 // Dropdown Selection Handling
@@ -27,16 +49,16 @@ const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unc
 const attributes_location = ['Americas', "Europe"];
 var currentData = [];
 d3.select("#attribute-selector-rating").selectAll("option").data(attributes_rating).enter()
-  .append("option").text(d => d).attr("value", d => d);
+    .append("option").text(d => d).attr("value", d => d);
 d3.select("#attribute-selector-location").selectAll("option").data(attributes_location).enter()
-  .append("option").text(d => d).attr("value", d => d);
+    .append("option").text(d => d).attr("value", d => d);
 
 d3.selectAll("#attribute-selector-rating, #attribute-selector-location")
-  .on('change', function() {
-    selectedAttribute = d3.select("#attribute-selector-rating").property('value');
-    selectedLocation = d3.select("#attribute-selector-location").property('value');
-    updatePlot();
-  });
+    .on('change', function() {
+        selectedAttribute = d3.select("#attribute-selector-rating").property('value');
+        selectedLocation = d3.select("#attribute-selector-location").property('value');
+        updatePlot();
+    });
 
 updatePlot();
 
@@ -46,6 +68,20 @@ updatePlot();
 function updatePlot() {
     const location_data = selectedLocation === 'Americas' ? 'data/americas.csv' : 'data/europe.csv';
 
+    // Update or append title
+    var title = svg.selectAll(".chart-title").data([selectedLocation]);
+    title.enter()
+        .append("text")
+        .attr("class", "chart-title")
+        .merge(title)
+        .attr("x", width / 2)
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "20px")
+        .style("fill", "#fcdcbf")
+        .style("font-family", "Karla; sans-serif")
+        .text(d => d);
+
     d3.csv(location_data).then(data => {
         data.forEach(d => {
             attributes_rating.forEach(attr => d[attr] = +d[attr]);
@@ -54,10 +90,24 @@ function updatePlot() {
         currentData = data;
         xAxis.domain([0, d3.max(data, d => d[selectedAttribute])]);
         yAxis.domain([0, d3.max(data, d => d.views)]);
-        xAxisGroup.call(d3.axisBottom(xAxis));
-        yAxisGroup.call(d3.axisLeft(yAxis));
-
+        xAxisGroup
+            .call(d3.axisBottom(xAxis)
+                .tickSize(5)
+            )
+            .selectAll("text")
+            .style("font-size", "18px");
+        yAxisGroup
+            .call(d3.axisLeft(yAxis)
+                .tickSize(5)
+                .tickFormat(function(d) {
+                    return d3.formatPrefix(".0", 1e6)(d);
+                }))
+            .selectAll("text")
+            .style("font-size", "18px");
         updateCircles(data);
+        // Update the text of the x-axis label
+        svg.select(".x-axis-label")
+            .text(selectedAttribute);
     });
 }
 
@@ -79,7 +129,7 @@ function updateCircles(data) {
             d3.select(this).attr('stroke', null);
         })
 
-        circles.merge(enterCircles)
+    circles.merge(enterCircles)
         .transition()
         .duration(1000)
         .attr("cx", d => xAxis(d[selectedAttribute]))
@@ -114,7 +164,13 @@ function updateChart(event, data) {
         scatter.select(".brush").call(brush.move, null);
     }
 
-    xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis))
+    xAxisGroup.transition().duration(1000)
+        .call(d3.axisBottom(xAxis)
+            .tickSize(5)
+        )
+        .selectAll("text")
+        .style("font-size", "18px");
+
     scatter.selectAll("circle")
         .transition()
         .duration(1000)
