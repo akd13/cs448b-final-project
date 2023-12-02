@@ -4,10 +4,10 @@ const margin = { top: 50, right: 120, bottom: 50, left: 120 };
 const width = container.getBoundingClientRect().width - margin.left * 3 - margin.right * 3;
 const height = container.getBoundingClientRect().height - margin.top * 3 - margin.bottom * 3;
 const svg = d3.select("#viz3-svg").append("svg")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-              .attr("transform", `translate(${margin.left}, ${margin.top})`);
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 const xAxis = d3.scaleLinear().range([0, width]);
 const yAxis = d3.scaleLinear().range([height, 0]);
@@ -37,10 +37,10 @@ svg.append("text")
 
 // Define clip-path
 svg.append("clipPath")
-   .attr("id", "clip")
-   .append("rect")
-   .attr("width", width)
-   .attr("height", height);
+    .attr("id", "clip")
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height);
 const scatter = svg.append('g').attr("clip-path", "url(#clip)");
 
 // Dropdown Selection Handling
@@ -49,16 +49,16 @@ const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unc
 const attributes_location = ['Americas', "Europe"];
 var currentData = [];
 d3.select("#attribute-selector-rating").selectAll("option").data(attributes_rating).enter()
-  .append("option").text(d => d).attr("value", d => d);
+    .append("option").text(d => d).attr("value", d => d);
 d3.select("#attribute-selector-location").selectAll("option").data(attributes_location).enter()
-  .append("option").text(d => d).attr("value", d => d);
+    .append("option").text(d => d).attr("value", d => d);
 
 d3.selectAll("#attribute-selector-rating, #attribute-selector-location")
-  .on('change', function() {
-    selectedAttribute = d3.select("#attribute-selector-rating").property('value');
-    selectedLocation = d3.select("#attribute-selector-location").property('value');
-    updatePlot();
-  });
+    .on('change', function() {
+        selectedAttribute = d3.select("#attribute-selector-rating").property('value');
+        selectedLocation = d3.select("#attribute-selector-location").property('value');
+        updatePlot();
+    });
 
 updatePlot();
 
@@ -92,18 +92,18 @@ function updatePlot() {
         yAxis.domain([0, d3.max(data, d => d.views)]);
         xAxisGroup
             .call(d3.axisBottom(xAxis)
-            .tickSize(5)
+                .tickSize(5)
             )
-        .selectAll("text")
-        .style("font-size", "18px");
+            .selectAll("text")
+            .style("font-size", "18px");
         yAxisGroup
             .call(d3.axisLeft(yAxis)
-            .tickSize(5)
-            .tickFormat(function(d) {
-                return d3.formatPrefix(".0", 1e6)(d);
-            }))
-        .selectAll("text")
-        .style("font-size", "18px");
+                .tickSize(5)
+                .tickFormat(function(d) {
+                    return d3.formatPrefix(".0", 1e6)(d);
+                }))
+            .selectAll("text")
+            .style("font-size", "18px");
         updateCircles(data);
         // Update the text of the x-axis label
         svg.select(".x-axis-label")
@@ -129,7 +129,7 @@ function updateCircles(data) {
             d3.select(this).attr('stroke', null);
         })
 
-        circles.merge(enterCircles)
+    circles.merge(enterCircles)
         .transition()
         .duration(1000)
         .attr("cx", d => xAxis(d[selectedAttribute]))
@@ -165,9 +165,9 @@ function updateChart(event, data) {
     }
 
     xAxisGroup.transition().duration(1000)
-            .call(d3.axisBottom(xAxis)
+        .call(d3.axisBottom(xAxis)
             .tickSize(5)
-            )
+        )
         .selectAll("text")
         .style("font-size", "18px");
 
