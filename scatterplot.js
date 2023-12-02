@@ -38,6 +38,11 @@ var svg = d3.select("#viz3-svg")
     .append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+var xAxis = d3.scaleLinear().range([0, width]);
+var yAxis = d3.scaleLinear().range([height, 0]);
+var xAxisGroup = svg.append("g").attr("class", "axes x").attr("transform", `translate(0, ${height})`);
+var yAxisGroup = svg.append("g").attr("class", "axes y");
+
 /* Dropdown Selection */
 /**********************/
 select_rating.on('change', function() {
@@ -75,7 +80,7 @@ function updatePlot(selectedAttribute, selectedLocation) {
             d.views = +d.views;
         });
 
-        var xAxis = d3.scaleLinear()
+        xAxis = d3.scaleLinear()
             .domain([0, d3.max(data, function (d) {
                 return d[selectedAttribute];
             })])
@@ -87,7 +92,7 @@ function updatePlot(selectedAttribute, selectedLocation) {
             .attr("transform", `translate(0, ${height})`)
             .call(d3.axisBottom(xAxis));
 
-        var yAxis = d3.scaleLinear()
+        yAxis = d3.scaleLinear()
             .domain([0, d3.max(data, function (d) {
                 return d.views;
             })])
@@ -115,8 +120,18 @@ function updatePlot(selectedAttribute, selectedLocation) {
         var scatter = svg.append('g')
             .attr("clip-path", "url(#clip)")
 
+        xAxis.domain([0, d3.max(data, function(d) { return d[selectedAttribute]; })]);
+        yAxis.domain([0, d3.max(data, function(d) { return d.views; })]);
+        // Update the axes
+        xAxisGroup.call(d3.axisBottom(xAxis));
+        yAxisGroup.call(d3.axisLeft(yAxis));
+
+        // Add circles
         var circles = scatter.selectAll("circle")
             .data(data);
+
+        circles.exit().remove();
+
         // Add the brushing
         scatter
             .append("g")
@@ -152,8 +167,6 @@ function updatePlot(selectedAttribute, selectedLocation) {
                 .attr("cy", function (d) { return yAxis(d.views); });
         }
 
-        circles.exit().remove();
-
         circles
             .enter()
             .append("circle")
@@ -165,7 +178,7 @@ function updatePlot(selectedAttribute, selectedLocation) {
                 return yAxis(d.views);
             })
             .attr("r", 4)
-            .style("fill", "rgba(143,38,38,0.64)")
+            .style("fill", "rgb(255,0,0)")
             .on('mouseover', function (event, d) {
                 d3.select(this).attr('stroke', 'white').attr('stroke-width', 2);
             })
@@ -179,6 +192,7 @@ function updatePlot(selectedAttribute, selectedLocation) {
             });
 
         svg.select(".label-x").remove();
+        svg.select(".brush").call(brush.move, null);
         svg.append("text")
             .attr("class", "label-x")
             .attr("text-anchor", "end")
