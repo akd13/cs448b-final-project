@@ -42,6 +42,24 @@ svg.append("clipPath")
     .attr("width", width)
     .attr("height", height);
 const scatter = svg.append('g').attr("clip-path", "url(#clip)");
+const instructionText = scatter.append("text")
+    .attr("class", "instruction-text")
+    .attr("x", width / 3)
+    .attr("y", height / 3)
+    .attr("text-anchor", "middle")
+    .style("fill", "white")
+    .style("font-size", "16px")
+    .style("font-family", "Karla; sans-serif")
+
+instructionText.append("tspan")
+    .attr("x", width / 2)
+    .attr("dy", "-0.6em")
+    .text("select area to zoom in");
+
+instructionText.append("tspan")
+    .attr("x", width / 2)
+    .attr("dy", "1.2em")
+    .text("double click to zoom out");
 
 // Dropdown Selection Handling
 var selectedAttribute = 'Funny', selectedLocation = 'Americas';
@@ -163,7 +181,7 @@ function updateChart(event, data) {
         xAxis.domain(newDomain);
         scatter.select(".brush").call(brush.move, null);
     }
-
+    svg.select(".instruction-text").remove();
     xAxisGroup.transition().duration(1000)
         .call(d3.axisBottom(xAxis)
             .tickSize(5)
