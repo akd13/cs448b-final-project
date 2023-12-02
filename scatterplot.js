@@ -13,14 +13,19 @@ const xAxis = d3.scaleLinear().range([0, width]);
 const yAxis = d3.scaleLinear().range([height, 0]);
 const xAxisGroup = svg.append("g").attr("class", "axes x").attr("transform", `translate(0, ${height})`);
 const yAxisGroup = svg.append("g").attr("class", "axes y");
+// Define clip-path
+svg.append("clipPath")
+   .attr("id", "clip")
+   .append("rect")
+   .attr("width", width)
+   .attr("height", height);
 const scatter = svg.append('g').attr("clip-path", "url(#clip)");
 
 // Dropdown Selection Handling
 var selectedAttribute = 'Funny', selectedLocation = 'Americas';
 const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
 const attributes_location = ['Americas', "Europe"];
-var tooltip = d3.select("#tooltip");
-
+var currentData = [];
 d3.select("#attribute-selector-rating").selectAll("option").data(attributes_rating).enter()
   .append("option").text(d => d).attr("value", d => d);
 d3.select("#attribute-selector-location").selectAll("option").data(attributes_location).enter()
@@ -46,7 +51,7 @@ function updatePlot() {
             attributes_rating.forEach(attr => d[attr] = +d[attr]);
             d.views = +d.views;
         });
-
+        currentData = data;
         xAxis.domain([0, d3.max(data, d => d[selectedAttribute])]);
         yAxis.domain([0, d3.max(data, d => d.views)]);
         xAxisGroup.call(d3.axisBottom(xAxis));
@@ -92,22 +97,24 @@ function updateCircles(data) {
 }
 
 // Brushing Functionality
-var brush = d3.brushX().extent([[0, 0], [width, height]]).on("end", updateChart);
+var brush = d3.brushX().extent([[0, 0], [width, height]]).on("end", event => updateChart(event, currentData)); // Pass data here
 scatter.append("g").attr("class", "brush").call(brush);
+var idleTimeout;
+function idled() { idleTimeout = null; }
 // Update Chart Function for Brushing
-function updateChart(event) {
-    var selection = event.selection;
-    if (!selection) {
-        // If there's no selection, reset to the original domain
+function updateChart(event, data) {
+    var extent = event.selection;
+
+    if (!extent) {
+        if (!idleTimeout) return idleTimeout = setTimeout(idled, 350);
         xAxis.domain(d3.extent(data, d => d[selectedAttribute]));
     } else {
-        // Update the x-axis domain based on the brush selection
-        xAxis.domain([xAxis.invert(selection[0]), xAxis.invert(selection[1])]);
-        scatter.select(".brush").call(brush.move, null); // Remove brush area
+        var newDomain = [xAxis.invert(extent[0]), xAxis.invert(extent[1])];
+        xAxis.domain(newDomain);
+        scatter.select(".brush").call(brush.move, null);
     }
-    // Redraw the x-axis
-    xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis));
-    // Update the positions of the circles
+
+    xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis))
     scatter.selectAll("circle")
         .transition()
         .duration(1000)
