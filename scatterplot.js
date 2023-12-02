@@ -115,7 +115,7 @@ function updatePlot(selectedAttribute, selectedLocation) {
         var scatter = svg.append('g')
             .attr("clip-path", "url(#clip)")
 
-        var circles = svg.selectAll("circle")
+        var circles = scatter.selectAll("circle")
             .data(data);
         // Add the brushing
         scatter
