@@ -99,18 +99,22 @@ function updateCircles(data) {
 // Brushing Functionality
 var brush = d3.brushX().extent([[0, 0], [width, height]]).on("end", event => updateChart(event, currentData)); // Pass data here
 scatter.append("g").attr("class", "brush").call(brush);
+var idleTimeout;
+function idled() { idleTimeout = null; }
 // Update Chart Function for Brushing
 function updateChart(event, data) {
-    var selection = event.selection;
+    var extent = event.selection;
 
-    if (!selection) {
+    if (!extent) {
+        if (!idleTimeout) return idleTimeout = setTimeout(idled, 350);
         xAxis.domain(d3.extent(data, d => d[selectedAttribute]));
     } else {
-        var newDomain = [xAxis.invert(selection[0]), xAxis.invert(selection[1])];
+        var newDomain = [xAxis.invert(extent[0]), xAxis.invert(extent[1])];
         xAxis.domain(newDomain);
+        scatter.select(".brush").call(brush.move, null);
     }
 
-    xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis));
+    xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis))
     scatter.selectAll("circle")
         .transition()
         .duration(1000)
