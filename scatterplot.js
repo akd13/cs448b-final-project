@@ -96,16 +96,20 @@ scatter.append("g").attr("class", "brush").call(brush);
 // Update Chart Function for Brushing
 function updateChart(event, data) {
     var selection = event.selection;
+
     if (!selection) {
-        // If there's no selection, reset to the original domain
+        // Reset to show the entire dataset
         xAxis.domain(d3.extent(data, d => d[selectedAttribute]));
     } else {
         // Update the x-axis domain based on the brush selection
-        xAxis.domain([xAxis.invert(selection[0]), xAxis.invert(selection[1])]);
-        scatter.select(".brush").call(brush.move, null); // Remove brush area
+        // Convert pixel coordinates to domain values
+        var newDomain = [xAxis.invert(selection[0]), xAxis.invert(selection[1])];
+        xAxis.domain(newDomain);
     }
+
     // Redraw the x-axis
     xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis));
+
     // Update the positions of the circles
     scatter.selectAll("circle")
         .transition()
