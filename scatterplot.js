@@ -68,7 +68,7 @@ function updateCircles(data) {
         .style("fill", "rgb(255,0,0)")
         .on('mouseover', function(event, d) {
             //add tooltip
-            console.log(d,"inside mouseover");
+            // console.log(d,"inside mouseover");
             d3.select(this).attr('stroke', 'white').attr('stroke-width', 2);
         })
         .on('mouseout', function() {
