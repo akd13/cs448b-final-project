@@ -125,12 +125,15 @@ function updatePlot() {
         svg.select(".x-axis-label")
             .text(selectedAttribute);
     });
+
+    if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
+    drawLineOfBestFit(currentData);
+    }
 }
 
 // Update Circles
 function updateCircles(data) {
     var circles = scatter.selectAll("circle").data(data);
-
     var enterCircles = circles.enter().append("circle")
         .merge(circles)
         .attr("r", 4)
@@ -160,6 +163,9 @@ function updateCircles(data) {
         .text(d => `${d.main_speaker}: ${d.city}`);
 
     circles.exit().remove();
+    if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
+        drawLineOfBestFit(data);
+    }
 }
 
 // Brushing Functionality
@@ -170,10 +176,13 @@ function idled() { idleTimeout = null; }
 // Update Chart Function for Brushing
 function updateChart(event, data) {
     var extent = event.selection;
-
     if (!extent) {
         if (!idleTimeout) return idleTimeout = setTimeout(idled, 350);
         xAxis.domain(d3.extent(data, d => d[selectedAttribute]));
+        d3.select("#lineOfBestFitContainer").style("display", "block");
+        if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
+            drawLineOfBestFit(data.filter(d => xAxis.domain().includes(d[selectedAttribute])));
+        }
     } else {
         var newDomain = [xAxis.invert(extent[0]), xAxis.invert(extent[1])];
         xAxis.domain(newDomain);
@@ -221,3 +230,6 @@ function drawLineOfBestFit(data) {
             .style("fill", "none");
     }
 }
+d3.select("#lineOfBestFitCheckbox").on("change", function() {
+    drawLineOfBestFit(currentData);
+});
