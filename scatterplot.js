@@ -44,8 +44,8 @@ svg.append("clipPath")
 const scatter = svg.append('g').attr("clip-path", "url(#clip)");
 const instructionText = scatter.append("text")
     .attr("class", "instruction-text")
-    .attr("x", width / 3)
-    .attr("y", height / 3)
+    .attr("x", width / 6)
+    .attr("y", height / 6)
     .attr("text-anchor", "middle")
     .style("fill", "white")
     .style("font-size", "16px")
@@ -77,9 +77,7 @@ d3.selectAll("#attribute-selector-rating, #attribute-selector-location")
         selectedLocation = d3.select("#attribute-selector-location").property('value');
         updatePlot();
     });
-
 updatePlot();
-
 /*     Create SVG       */
 /**********************/
 // Update Plot Function
@@ -194,4 +192,32 @@ function updateChart(event, data) {
         .duration(1000)
         .attr("cx", d => xAxis(d[selectedAttribute]))
         .attr("cy", d => yAxis(d.views));
+}
+
+function drawLineOfBestFit(data) {
+    const checkbox = d3.select("#lineOfBestFitCheckbox");
+    svg.selectAll(".line-of-best-fit").remove();
+
+    // Check if the checkbox is checked
+    if (checkbox.node() && checkbox.property("checked")) {
+        // Calculate coefficients for line of best fit (y = mx + b)
+        const xMean = d3.mean(data, d => d[selectedAttribute]);
+        const yMean = d3.mean(data, d => d.views);
+        const m = d3.sum(data, d => (d[selectedAttribute] - xMean) * (d.views - yMean)) / d3.sum(data, d => Math.pow(d[selectedAttribute] - xMean, 2));
+        const b = yMean - m * xMean;
+
+        // Create the line function
+        const line = d3.line()
+            .x(d => xAxis(d[selectedAttribute]))
+            .y(d => yAxis(m * d[selectedAttribute] + b));
+
+        // Draw the line
+        svg.append("path")
+            .datum(data)
+            .attr("class", "line-of-best-fit")
+            .attr("d", line)
+            .style("stroke", "white")
+            .style("stroke-width", 2)
+            .style("fill", "none");
+    }
 }
