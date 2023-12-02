@@ -265,7 +265,7 @@ body {
 .arrow-container {
     position: absolute;
     bottom: 3%;
-    transform: translateY(-50%);
+    transform: translateY(90%);
     width: 100%;
 }
 
