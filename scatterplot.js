@@ -13,6 +13,12 @@ const xAxis = d3.scaleLinear().range([0, width]);
 const yAxis = d3.scaleLinear().range([height, 0]);
 const xAxisGroup = svg.append("g").attr("class", "axes x").attr("transform", `translate(0, ${height})`);
 const yAxisGroup = svg.append("g").attr("class", "axes y");
+// Define clip-path
+svg.append("clipPath")
+   .attr("id", "clip")
+   .append("rect")
+   .attr("width", width)
+   .attr("height", height);
 const scatter = svg.append('g').attr("clip-path", "url(#clip)");
 
 // Dropdown Selection Handling
@@ -98,19 +104,13 @@ function updateChart(event, data) {
     var selection = event.selection;
 
     if (!selection) {
-        // Reset to show the entire dataset
         xAxis.domain(d3.extent(data, d => d[selectedAttribute]));
     } else {
-        // Update the x-axis domain based on the brush selection
-        // Convert pixel coordinates to domain values
         var newDomain = [xAxis.invert(selection[0]), xAxis.invert(selection[1])];
         xAxis.domain(newDomain);
     }
 
-    // Redraw the x-axis
     xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis));
-
-    // Update the positions of the circles
     scatter.selectAll("circle")
         .transition()
         .duration(1000)
