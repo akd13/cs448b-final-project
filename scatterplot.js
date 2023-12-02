@@ -20,7 +20,7 @@ svg.append("text")
     .attr("x", 0 - (height / 2))
     .attr("dy", "0.5em")
     .style("text-anchor", "middle")
-    .style("fill", "white")
+    .style("fill", "#fcdcbf")
     .style("font-size", "20px")
     .style("font-family", "Karla; sans-serif")
     .text("Views");
@@ -68,7 +68,7 @@ function updatePlot() {
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")
         .style("font-size", "20px")
-        .style("fill", "white")
+        .style("fill", "#fcdcbf")
         .style("font-family", "Karla; sans-serif")
         .text(d => d);
 
@@ -102,7 +102,7 @@ function updatePlot() {
             .merge(xAxisLabel)
             .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
             .style("text-anchor", "middle")
-            .style("fill", "white")
+            .style("fill", "#fcdcbf")
             .style("font-family", "Karla; sans-serif")
             .text(d => d);
     });
