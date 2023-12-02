@@ -1,6 +1,6 @@
 // Configuration and Setup
 const container = d3.select("#viz3").node();
-const margin = { top: 50, right: 90, bottom: 50, left: 90 };
+const margin = { top: 50, right: 120, bottom: 50, left: 120 };
 const width = container.getBoundingClientRect().width - margin.left * 3 - margin.right * 3;
 const height = container.getBoundingClientRect().height - margin.top * 3 - margin.bottom * 3;
 const svg = d3.select("#viz3-svg").append("svg")
@@ -54,9 +54,20 @@ function updatePlot() {
         currentData = data;
         xAxis.domain([0, d3.max(data, d => d[selectedAttribute])]);
         yAxis.domain([0, d3.max(data, d => d.views)]);
-        xAxisGroup.call(d3.axisBottom(xAxis));
-        yAxisGroup.call(d3.axisLeft(yAxis));
-
+        xAxisGroup
+            .call(d3.axisBottom(xAxis)
+            .tickSize(5)
+            )
+        .selectAll("text")
+        .style("font-size", "18px");
+        yAxisGroup
+            .call(d3.axisLeft(yAxis)
+            .tickSize(5)
+            .tickFormat(function(d) {
+                return d3.formatPrefix(".0", 1e6)(d);
+            }))
+        .selectAll("text")
+        .style("font-size", "18px");
         updateCircles(data);
     });
 }
@@ -114,7 +125,13 @@ function updateChart(event, data) {
         scatter.select(".brush").call(brush.move, null);
     }
 
-    xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis))
+    xAxisGroup.transition().duration(1000)
+            .call(d3.axisBottom(xAxis)
+            .tickSize(5)
+            )
+        .selectAll("text")
+        .style("font-size", "18px");
+
     scatter.selectAll("circle")
         .transition()
         .duration(1000)
