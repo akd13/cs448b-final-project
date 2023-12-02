@@ -56,8 +56,6 @@ function updatePlot() {
     });
 }
 
-// Create a tooltip
-
 // Update Circles
 function updateCircles(data) {
     var circles = scatter.selectAll("circle").data(data);
@@ -93,14 +91,12 @@ function updateCircles(data) {
     circles.exit().remove();
 }
 
-// Brushing Functionality (Assuming it's similar to your original setup)
-// Add this section only if brushing is needed
+// Brushing Functionality
 var brush = d3.brushX().extent([[0, 0], [width, height]]).on("end", updateChart);
 scatter.append("g").attr("class", "brush").call(brush);
 // Update Chart Function for Brushing
 function updateChart(event) {
     var selection = event.selection;
-
     if (!selection) {
         // If there's no selection, reset to the original domain
         xAxis.domain(d3.extent(data, d => d[selectedAttribute]));
@@ -109,10 +105,8 @@ function updateChart(event) {
         xAxis.domain([xAxis.invert(selection[0]), xAxis.invert(selection[1])]);
         scatter.select(".brush").call(brush.move, null); // Remove brush area
     }
-
     // Redraw the x-axis
     xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis));
-
     // Update the positions of the circles
     scatter.selectAll("circle")
         .transition()
