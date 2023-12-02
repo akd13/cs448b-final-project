@@ -31,12 +31,12 @@ select_location.selectAll("option")
     .text(d => d)
     .attr("value", d => d);
 
-    var svg = d3.select("#viz3-svg")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", `translate(${margin.left}, ${margin.top})`);
+var svg = d3.select("#viz3-svg")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 /* Dropdown Selection */
 /**********************/
@@ -58,7 +58,7 @@ updatePlot(selectedAttribute, selectedLocation);
 /**********************/
 
 function updatePlot(selectedAttribute, selectedLocation) {
-    
+
     var location_data;
     if (selectedLocation === 'Americas') {
         location_data = 'data/americas.csv';
@@ -75,7 +75,7 @@ function updatePlot(selectedAttribute, selectedLocation) {
             d.views = +d.views;
         });
 
-        var x = d3.scaleLinear()
+        var xAxis = d3.scaleLinear()
             .domain([0, d3.max(data, function (d) {
                 return d[selectedAttribute];
             })])
@@ -85,9 +85,9 @@ function updatePlot(selectedAttribute, selectedLocation) {
         svg.append("g")
             .attr("class", "axes x")
             .attr("transform", `translate(0, ${height})`)
-            .call(d3.axisBottom(x));
+            .call(d3.axisBottom(xAxis));
 
-        var y = d3.scaleLinear()
+        var yAxis = d3.scaleLinear()
             .domain([0, d3.max(data, function (d) {
                 return d.views;
             })])
@@ -96,11 +96,62 @@ function updatePlot(selectedAttribute, selectedLocation) {
         svg.select(".axes.y").remove();
         svg.append("g")
             .attr("class", "axes y")
-            .call(d3.axisLeft(y));
+            .call(d3.axisLeft(yAxis));
+
+        var clip = svg.append("defs").append("svg:clipPath")
+            .attr("id", "clip")
+            .append("svg:rect")
+            .attr("width", width )
+            .attr("height", height )
+            .attr("x", 0)
+            .attr("y", 0);
+
+        // Add brushing
+        var brush = d3.brushX()
+            .extent( [ [0,0], [width,height] ] )
+            .on("end", updateChart)
+
+        // Create the scatter variable: where both the circles and the brush take place
+        var scatter = svg.append('g')
+            .attr("clip-path", "url(#clip)")
 
         var circles = svg.selectAll("circle")
-                .data(data);
-        
+            .data(data);
+        // Add the brushing
+        scatter
+            .append("g")
+            .attr("class", "brush")
+            .call(brush);
+
+        var idleTimeout;
+        function idled() { idleTimeout = null; }
+
+        // A function that updates the chart for given boundaries
+        function updateChart(event) {
+            var extent = event.selection;
+
+
+            if (!extent) {
+                if (!idleTimeout) return idleTimeout = setTimeout(idled, 350);
+                xAxis.domain(d3.extent(data, function(d) { return d[selectedAttribute]; }));
+            } else {
+                xAxis.domain([xAxis.invert(extent[0]), xAxis.invert(extent[1])]);
+                svg.select(".brush").call(brush.move, null); // Remove brush area
+            }
+
+            svg.select(".axes.x")
+                .transition()
+                .duration(1000)
+                .call(d3.axisBottom(xAxis));
+
+            svg
+                .selectAll("circle")
+                .transition()
+                .duration(1000)
+                .attr("cx", function (d) { return xAxis(d[selectedAttribute]); })
+                .attr("cy", function (d) { return yAxis(d.views); });
+        }
+
         circles.exit().remove();
 
         circles
@@ -108,10 +159,10 @@ function updatePlot(selectedAttribute, selectedLocation) {
             .append("circle")
             .merge(circles)
             .attr("cx", function (d) {
-                return x(d[selectedAttribute]);
+                return xAxis(d[selectedAttribute]);
             })
             .attr("cy", function (d) {
-                return y(d.views);
+                return yAxis(d.views);
             })
             .attr("r", 4)
             .style("fill", "rgba(143,38,38,0.64)")
@@ -129,14 +180,14 @@ function updatePlot(selectedAttribute, selectedLocation) {
 
         svg.select(".label-x").remove();
         svg.append("text")
-             .attr("class", "label-x")
+            .attr("class", "label-x")
             .attr("text-anchor", "end")
             .attr("x", width / 2 + margin.left)
             .attr("y", height + margin.top -5)
             .attr("font-size", "25px")
             .text(selectedAttribute)
             .style("fill", "white");
-            
+
         svg.select(".label-y").remove();
         svg.append("text")
             .attr("class", "label-y")
