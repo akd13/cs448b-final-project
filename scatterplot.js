@@ -1,216 +1,98 @@
-/* Margins */
-/***********/
+// Configuration and Setup
 const container = d3.select("#viz3").node();
-const containerWidth = container.getBoundingClientRect().width;
-const containerHeight = container.getBoundingClientRect().height;
-const margin = {top: 50, right: 90, bottom: 50, left: 90}
-const width = containerWidth - margin.left*3 - margin.right*3;
-const height = containerHeight - margin.top*3 - margin.bottom*3;
+const margin = { top: 50, right: 90, bottom: 50, left: 90 };
+const width = container.getBoundingClientRect().width - margin.left * 3 - margin.right * 3;
+const height = container.getBoundingClientRect().height - margin.top * 3 - margin.bottom * 3;
+const svg = d3.select("#viz3-svg").append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-/*   Dropdown Button   */
-/**********************/
+const xAxis = d3.scaleLinear().range([0, width]);
+const yAxis = d3.scaleLinear().range([height, 0]);
+const xAxisGroup = svg.append("g").attr("class", "axes x").attr("transform", `translate(0, ${height})`);
+const yAxisGroup = svg.append("g").attr("class", "axes y");
+const scatter = svg.append('g').attr("clip-path", "url(#clip)");
 
-var selectedAttribute = 'Funny'
+// Dropdown Selection Handling
+var selectedAttribute = 'Funny', selectedLocation = 'Americas';
 const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
-const select_rating = d3.select("#attribute-selector-rating");
-select_rating.selectAll("option")
-    .data(attributes_rating)
-    .enter()
-    .append("option")
-    .text(d => d)
-    .attr("value", d => d);
+const attributes_location = ['Americas', "Europe"];
 
+d3.select("#attribute-selector-rating").selectAll("option").data(attributes_rating).enter()
+  .append("option").text(d => d).attr("value", d => d);
+d3.select("#attribute-selector-location").selectAll("option").data(attributes_location).enter()
+  .append("option").text(d => d).attr("value", d => d);
 
-var selectedLocation = 'Americas'
-const attributes_location = ['Americas', "Europe"]
-const select_location = d3.select("#attribute-selector-location");
-select_location.selectAll("option")
-    .data(attributes_location)
-    .enter()
-    .append("option")
-    .text(d => d)
-    .attr("value", d => d);
+d3.selectAll("#attribute-selector-rating, #attribute-selector-location")
+  .on('change', function() {
+    selectedAttribute = d3.select("#attribute-selector-rating").property('value');
+    selectedLocation = d3.select("#attribute-selector-location").property('value');
+    updatePlot();
+  });
 
-var svg = d3.select("#viz3-svg")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin.left}, ${margin.top})`);
-
-var xAxis = d3.scaleLinear().range([0, width]);
-var yAxis = d3.scaleLinear().range([height, 0]);
-var xAxisGroup = svg.append("g").attr("class", "axes x").attr("transform", `translate(0, ${height})`);
-var yAxisGroup = svg.append("g").attr("class", "axes y");
-
-/* Dropdown Selection */
-/**********************/
-select_rating.on('change', function() {
-    selectedAttribute = d3.select(this).property('value');
-    console.log(selectedAttribute);
-    updatePlot(selectedAttribute, selectedLocation);
-});
-
-select_location.on('change', function() {
-    selectedLocation = d3.select(this).property('value');
-    console.log(selectedLocation);
-    updatePlot(selectedAttribute, selectedLocation);
-});
-
-updatePlot(selectedAttribute, selectedLocation);
+updatePlot();
 
 /*     Create SVG       */
 /**********************/
+// Update Plot Function
+function updatePlot() {
+    const location_data = selectedLocation === 'Americas' ? 'data/americas.csv' : 'data/europe.csv';
 
-function updatePlot(selectedAttribute, selectedLocation) {
-
-    var location_data;
-    if (selectedLocation === 'Americas') {
-        location_data = 'data/americas.csv';
-    }
-    else {
-        location_data = 'data/europe.csv';
-    }
-
-    d3.csv(location_data).then(function (data) {
-        data.forEach(function (d) {
-            attributes_rating.forEach(attr => {
-                d[attr] = +d[attr];
-            });
+    d3.csv(location_data).then(data => {
+        data.forEach(d => {
+            attributes_rating.forEach(attr => d[attr] = +d[attr]);
             d.views = +d.views;
         });
 
-        xAxis = d3.scaleLinear()
-            .domain([0, d3.max(data, function (d) {
-                return d[selectedAttribute];
-            })])
-            .range([0, width]);
-
-        svg.select(".axes.x").remove();
-        svg.append("g")
-            .attr("class", "axes x")
-            .attr("transform", `translate(0, ${height})`)
-            .call(d3.axisBottom(xAxis));
-
-        yAxis = d3.scaleLinear()
-            .domain([0, d3.max(data, function (d) {
-                return d.views;
-            })])
-            .range([height, 0]);
-
-        svg.select(".axes.y").remove();
-        svg.append("g")
-            .attr("class", "axes y")
-            .call(d3.axisLeft(yAxis));
-
-        var clip = svg.append("defs").append("svg:clipPath")
-            .attr("id", "clip")
-            .append("svg:rect")
-            .attr("width", width )
-            .attr("height", height )
-            .attr("x", 0)
-            .attr("y", 0);
-
-        // Add brushing
-        var brush = d3.brushX()
-            .extent( [ [0,0], [width,height] ] )
-            .on("end", updateChart)
-
-        // Create the scatter variable: where both the circles and the brush take place
-        var scatter = svg.append('g')
-            .attr("clip-path", "url(#clip)")
-
-        xAxis.domain([0, d3.max(data, function(d) { return d[selectedAttribute]; })]);
-        yAxis.domain([0, d3.max(data, function(d) { return d.views; })]);
-        // Update the axes
+        xAxis.domain([0, d3.max(data, d => d[selectedAttribute])]);
+        yAxis.domain([0, d3.max(data, d => d.views)]);
         xAxisGroup.call(d3.axisBottom(xAxis));
         yAxisGroup.call(d3.axisLeft(yAxis));
 
-        // Add circles
-        var circles = scatter.selectAll("circle")
-            .data(data);
-
-        circles.exit().remove();
-
-        // Add the brushing
-        scatter
-            .append("g")
-            .attr("class", "brush")
-            .call(brush);
-
-        var idleTimeout;
-        function idled() { idleTimeout = null; }
-
-        // A function that updates the chart for given boundaries
-        function updateChart(event) {
-            var extent = event.selection;
-
-
-            if (!extent) {
-                if (!idleTimeout) return idleTimeout = setTimeout(idled, 350);
-                xAxis.domain(d3.extent(data, function(d) { return d[selectedAttribute]; }));
-            } else {
-                xAxis.domain([xAxis.invert(extent[0]), xAxis.invert(extent[1])]);
-                svg.select(".brush").call(brush.move, null); // Remove brush area
-            }
-
-            svg.select(".axes.x")
-                .transition()
-                .duration(1000)
-                .call(d3.axisBottom(xAxis));
-
-            svg
-                .selectAll("circle")
-                .transition()
-                .duration(1000)
-                .attr("cx", function (d) { return xAxis(d[selectedAttribute]); })
-                .attr("cy", function (d) { return yAxis(d.views); });
-        }
-
-        circles
-            .enter()
-            .append("circle")
-            .merge(circles)
-            .attr("cx", function (d) {
-                return xAxis(d[selectedAttribute]);
-            })
-            .attr("cy", function (d) {
-                return yAxis(d.views);
-            })
-            .attr("r", 4)
-            .style("fill", "rgb(255,0,0)")
-            .on('mouseover', function (event, d) {
-                d3.select(this).attr('stroke', 'white').attr('stroke-width', 2);
-            })
-            .on('mouseout', function () {
-                d3.select(this).attr('stroke', null)
-            })
-            .append('title')
-            .attr('class', 'tooltip')
-            .text(function (d) {
-                return d.main_speaker + ", "+ d.city;
-            });
-
-        svg.select(".label-x").remove();
-        svg.select(".brush").call(brush.move, null);
-        svg.append("text")
-            .attr("class", "label-x")
-            .attr("text-anchor", "end")
-            .attr("x", width / 2 + margin.left)
-            .attr("y", height + margin.top -5)
-            .attr("font-size", "25px")
-            .text(selectedAttribute)
-            .style("fill", "white");
-
-        svg.select(".label-y").remove();
-        svg.append("text")
-            .attr("class", "label-y")
-            .attr("text-anchor", "end")
-            .attr("transform", "rotate(-90)")
-            .attr("x", -margin.top - height / 2 + 80)
-            .attr("y", -margin.left + 18)
-            .attr("font-size", "25px")
-            .text("Views")
-            .style("fill", "white");
+        updateCircles(data);
     });
+}
+
+// Update Circles
+function updateCircles(data) {
+    var circles = scatter.selectAll("circle").data(data);
+    circles.exit().remove();
+    circles.enter().append("circle").merge(circles)
+        .attr("cx", d => xAxis(d[selectedAttribute]))
+        .attr("cy", d => yAxis(d.views))
+        .attr("r", 4)
+        .style("fill", "rgb(255,0,0)")
+        .on('mouseover', event => d3.select(event.currentTarget).attr('stroke', 'white').attr('stroke-width', 2))
+        .on('mouseout', event => d3.select(event.currentTarget).attr('stroke', null))
+        .append('title').attr('class', 'tooltip').text(d => `${d.main_speaker}, ${d.city}`);
+}
+
+// Brushing Functionality (Assuming it's similar to your original setup)
+// Add this section only if brushing is needed
+var brush = d3.brushX().extent([[0, 0], [width, height]]).on("end", updateChart);
+scatter.append("g").attr("class", "brush").call(brush);
+// Update Chart Function for Brushing
+function updateChart(event) {
+    var selection = event.selection;
+
+    if (!selection) {
+        // If there's no selection, reset to the original domain
+        xAxis.domain(d3.extent(data, d => d[selectedAttribute]));
+    } else {
+        // Update the x-axis domain based on the brush selection
+        xAxis.domain([xAxis.invert(selection[0]), xAxis.invert(selection[1])]);
+        scatter.select(".brush").call(brush.move, null); // Remove brush area
+    }
+
+    // Redraw the x-axis
+    xAxisGroup.transition().duration(1000).call(d3.axisBottom(xAxis));
+
+    // Update the positions of the circles
+    scatter.selectAll("circle")
+        .transition()
+        .duration(1000)
+        .attr("cx", d => xAxis(d[selectedAttribute]))
+        .attr("cy", d => yAxis(d.views));
 }
