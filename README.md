@@ -11,4 +11,4 @@
 3. [Ghana visualization](https://ghanadatastuff.com/post/comtradr_data_in_javascript/)
 4. [Me Too Rising](https://metoorising.withgoogle.com/)
 5. [D3 graphs](https://d3-graph-gallery.com/scatter.html)
-6. [Brushing Scatterplot](https://observablehq.com/@d3/brushable-scatterplot-matrix?intent=fork)
+6. [Brushing Scatterplot](https://d3-graph-gallery.com/graph/interactivity_brush.html)

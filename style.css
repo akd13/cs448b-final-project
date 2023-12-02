@@ -24,7 +24,7 @@
 #text-page {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
-    overflow: hidden; /* Enable scroll if needed */
+    overflow: scroll; /* Enable scroll if needed */
 }
 
 #text-page-heading {
@@ -84,7 +84,7 @@
 }
 
 .keyboard-container {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     padding: 10px;
@@ -95,6 +95,10 @@
     opacity: 0.7;
     display: inline-block;
     margin-right: 10px;
+    color: white;
+}
+
+#link-lang {
     color: white;
 }
 
