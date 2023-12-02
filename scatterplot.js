@@ -13,6 +13,18 @@ const xAxis = d3.scaleLinear().range([0, width]);
 const yAxis = d3.scaleLinear().range([height, 0]);
 const xAxisGroup = svg.append("g").attr("class", "axes x").attr("transform", `translate(0, ${height})`);
 const yAxisGroup = svg.append("g").attr("class", "axes y");
+// Append Y Axis label
+svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left + 50)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "0.5em")
+    .style("text-anchor", "middle")
+    .style("fill", "white")
+    .style("font-size", "20px")
+    .style("font-family", "Karla; sans-serif")
+    .text("Views");
+
 // Define clip-path
 svg.append("clipPath")
    .attr("id", "clip")
@@ -46,6 +58,20 @@ updatePlot();
 function updatePlot() {
     const location_data = selectedLocation === 'Americas' ? 'data/americas.csv' : 'data/europe.csv';
 
+    // Update or append title
+    var title = svg.selectAll(".chart-title").data([selectedLocation]);
+    title.enter()
+        .append("text")
+        .attr("class", "chart-title")
+        .merge(title)
+        .attr("x", width / 2)
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "20px")
+        .style("fill", "white")
+        .style("font-family", "Karla; sans-serif")
+        .text(d => d);
+
     d3.csv(location_data).then(data => {
         data.forEach(d => {
             attributes_rating.forEach(attr => d[attr] = +d[attr]);
@@ -69,6 +95,16 @@ function updatePlot() {
         .selectAll("text")
         .style("font-size", "18px");
         updateCircles(data);
+        var xAxisLabel = svg.selectAll(".x-axis-label").data([selectedAttribute]);
+        xAxisLabel.enter()
+            .append("text")
+            .attr("class", "x-axis-label")
+            .merge(xAxisLabel)
+            .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
+            .style("text-anchor", "middle")
+            .style("fill", "white")
+            .style("font-family", "Karla; sans-serif")
+            .text(d => d);
     });
 }
 
