@@ -19,6 +19,7 @@ const scatter = svg.append('g').attr("clip-path", "url(#clip)");
 var selectedAttribute = 'Funny', selectedLocation = 'Americas';
 const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
 const attributes_location = ['Americas', "Europe"];
+var tooltip = d3.select("#tooltip");
 
 d3.select("#attribute-selector-rating").selectAll("option").data(attributes_rating).enter()
   .append("option").text(d => d).attr("value", d => d);
@@ -56,17 +57,41 @@ function updatePlot() {
 }
 
 // Update Circles
+// Update Circles
+// Update Circles
+// Create a tooltip
+var tooltip = d3.select("#tooltip");
+
+// Update Circles
 function updateCircles(data) {
+    // Bind the new data to the circles
     var circles = scatter.selectAll("circle").data(data);
-    circles.exit().remove();
-    circles.enter().append("circle").merge(circles)
-        .attr("cx", d => xAxis(d[selectedAttribute]))
-        .attr("cy", d => yAxis(d.views))
+
+    // Enter + Update
+    circles.enter().append("circle")
+        .merge(circles) // merge enter and update selections
         .attr("r", 4)
         .style("fill", "rgb(255,0,0)")
-        .on('mouseover', event => d3.select(event.currentTarget).attr('stroke', 'white').attr('stroke-width', 2))
-        .on('mouseout', event => d3.select(event.currentTarget).attr('stroke', null))
-        .append('title').attr('class', 'tooltip').text(d => `${d.main_speaker}, ${d.city}`);
+        .on('mouseover', function(event, d) {
+            console.log(d, "tooltip");
+            tooltip.style("display", "inline")
+                   .html(`Speaker: ${d.main_speaker}<br>City: ${d.city}<br>Value: ${d[selectedAttribute]}`)
+                   .style("left", (event.pageX + 10) + "px")
+                   .style("top", (event.pageY + 10) + "px");
+            console.log(tooltip, "display");
+            d3.select(this).attr('stroke', 'white').attr('stroke-width', 2);
+        })
+        .on('mouseout', function() {
+            tooltip.style("display", "none");
+            d3.select(this).attr('stroke', null);
+        })
+        .transition()
+        .duration(1000)
+        .attr("cx", d => xAxis(d[selectedAttribute]))
+        .attr("cy", d => yAxis(d.views));
+
+    // Exit
+    circles.exit().remove();
 }
 
 // Brushing Functionality (Assuming it's similar to your original setup)
