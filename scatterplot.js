@@ -19,8 +19,7 @@ const scatter = svg.append('g').attr("clip-path", "url(#clip)");
 var selectedAttribute = 'Funny', selectedLocation = 'Americas';
 const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
 const attributes_location = ['Americas', "Europe"];
-var tooltip = d3.select("#tooltip");
-
+var currentData = [];
 d3.select("#attribute-selector-rating").selectAll("option").data(attributes_rating).enter()
   .append("option").text(d => d).attr("value", d => d);
 d3.select("#attribute-selector-location").selectAll("option").data(attributes_location).enter()
@@ -46,7 +45,7 @@ function updatePlot() {
             attributes_rating.forEach(attr => d[attr] = +d[attr]);
             d.views = +d.views;
         });
-
+        currentData = data;
         xAxis.domain([0, d3.max(data, d => d[selectedAttribute])]);
         yAxis.domain([0, d3.max(data, d => d.views)]);
         xAxisGroup.call(d3.axisBottom(xAxis));
@@ -92,10 +91,10 @@ function updateCircles(data) {
 }
 
 // Brushing Functionality
-var brush = d3.brushX().extent([[0, 0], [width, height]]).on("end", updateChart);
+var brush = d3.brushX().extent([[0, 0], [width, height]]).on("end", event => updateChart(event, currentData)); // Pass data here
 scatter.append("g").attr("class", "brush").call(brush);
 // Update Chart Function for Brushing
-function updateChart(event) {
+function updateChart(event, data) {
     var selection = event.selection;
     if (!selection) {
         // If there's no selection, reset to the original domain
