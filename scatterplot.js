@@ -12,6 +12,16 @@ const svg = d3.select("#viz3-svg").append("svg")
 const xAxis = d3.scaleLinear().range([0, width]);
 const yAxis = d3.scaleLinear().range([height, 0]);
 const xAxisGroup = svg.append("g").attr("class", "axes x").attr("transform", `translate(0, ${height})`);
+// Append X Axis label
+svg.append("text")
+    .attr("class", "x-axis-label")
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom-20) + ")")
+    .attr("dy", "0.75em")
+    .style("text-anchor", "middle")
+    .style("fill", "#fcdcbf")
+    .style("font-size", "20px")
+    .style("font-family", "Karla; sans-serif")
+    .text(selectedAttribute);
 const yAxisGroup = svg.append("g").attr("class", "axes y");
 // Append Y Axis label
 svg.append("text")
@@ -95,16 +105,9 @@ function updatePlot() {
         .selectAll("text")
         .style("font-size", "18px");
         updateCircles(data);
-        var xAxisLabel = svg.selectAll(".x-axis-label").data([selectedAttribute]);
-        xAxisLabel.enter()
-            .append("text")
-            .attr("class", "x-axis-label")
-            .merge(xAxisLabel)
-            .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
-            .style("text-anchor", "middle")
-            .style("fill", "#fcdcbf")
-            .style("font-family", "Karla; sans-serif")
-            .text(d => d);
+        // Update the text of the x-axis label
+        svg.select(".x-axis-label")
+            .text(selectedAttribute);
     });
 }
 
