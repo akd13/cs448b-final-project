@@ -6,7 +6,7 @@
 }
 
 #viz1-heading {
-    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-family: "Karla","sans-serif";
     font-size: 30px;
     font-weight: 400;
     transform: translateY(30%);
@@ -28,7 +28,7 @@
 }
 
 #text-page-heading {
-    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-family: "Karla","sans-serif";
     font-size: 30px;
     font-weight: 400;
     transform: translateY(30%);
@@ -77,7 +77,7 @@
     border-radius: 5px;
     pointer-events: none;
     font-size: 12px;
-    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-family: "Karla","sans-serif";
     font-weight: 400;
     line-height: 28px;
     color: #fcdcbf;
@@ -299,7 +299,7 @@ body {
 }
 
 #viz3-heading {
-    font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
+    font-family: "Karla","sans-serif";
     font-size: 30px;
     font-weight: 400;
     transform: translateY(20%);
