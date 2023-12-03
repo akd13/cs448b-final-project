@@ -127,7 +127,7 @@ function updatePlot() {
     });
 
     if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
-    drawLineOfBestFit(currentData);
+        drawLineOfBestFit(currentData);
     }
 }
 
@@ -179,10 +179,6 @@ function updateChart(event, data) {
     if (!extent) {
         if (!idleTimeout) return idleTimeout = setTimeout(idled, 350);
         xAxis.domain(d3.extent(data, d => d[selectedAttribute]));
-        d3.select("#lineOfBestFitContainer").style("display", "block");
-        if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
-            drawLineOfBestFit(data.filter(d => xAxis.domain().includes(d[selectedAttribute])));
-        }
     } else {
         var newDomain = [xAxis.invert(extent[0]), xAxis.invert(extent[1])];
         xAxis.domain(newDomain);
@@ -201,11 +197,17 @@ function updateChart(event, data) {
         .duration(1000)
         .attr("cx", d => xAxis(d[selectedAttribute]))
         .attr("cy", d => yAxis(d.views));
+
+    if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
+        // Filter data based on the new x-axis domain
+        let filteredData = data.filter(d => xAxis.domain()[0] <= d[selectedAttribute] && d[selectedAttribute] <= xAxis.domain()[1]);
+        drawLineOfBestFit(filteredData);
+    }
 }
 
 function drawLineOfBestFit(data) {
     const checkbox = d3.select("#lineOfBestFitCheckbox");
-    svg.selectAll(".line-of-best-fit").remove();
+    const lineClass = "line-of-best-fit";
 
     // Check if the checkbox is checked
     if (checkbox.node() && checkbox.property("checked")) {
@@ -215,19 +217,27 @@ function drawLineOfBestFit(data) {
         const m = d3.sum(data, d => (d[selectedAttribute] - xMean) * (d.views - yMean)) / d3.sum(data, d => Math.pow(d[selectedAttribute] - xMean, 2));
         const b = yMean - m * xMean;
 
-        // Create the line function
         const line = d3.line()
             .x(d => xAxis(d[selectedAttribute]))
             .y(d => yAxis(m * d[selectedAttribute] + b));
 
-        // Draw the line
-        svg.append("path")
-            .datum(data)
-            .attr("class", "line-of-best-fit")
-            .attr("d", line)
-            .style("stroke", "white")
-            .style("stroke-width", 2)
-            .style("fill", "none");
+        const linePath = svg.selectAll(`.${lineClass}`)
+            .data([data])
+            .join(
+                enter => enter.append("path")
+                    .attr("class", lineClass)
+                    .style("stroke", "white")
+                    .style("stroke-width", 2)
+                    .style("fill", "none")
+                    .attr("d", line),
+                update => update
+            );
+
+        linePath.transition()
+            .duration(1000)
+            .attr("d", line);
+    } else {
+        svg.selectAll(`.${lineClass}`).remove();
     }
 }
 d3.select("#lineOfBestFitCheckbox").on("change", function() {
