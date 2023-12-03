@@ -16,12 +16,12 @@ const xAxisGroup = svg.append("g").attr("class", "axes x").attr("transform", `tr
 svg.append("text")
     .attr("class", "x-axis-label")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom-20) + ")")
-    .attr("dy", "0.75em")
+    .attr("dy", "0.8em")
     .style("text-anchor", "middle")
     .style("fill", "#fcdcbf")
     .style("font-size", "20px")
     .style("font-family", "Karla; sans-serif")
-    .text(selectedAttribute);
+    .text("Number of \""+selectedAttribute+"\" Ratings");
 const yAxisGroup = svg.append("g").attr("class", "axes y");
 // Append Y Axis label
 svg.append("text")
@@ -123,7 +123,7 @@ function updatePlot() {
         updateCircles(data);
         // Update the text of the x-axis label
         svg.select(".x-axis-label")
-            .text(selectedAttribute);
+            .text("Number of \""+selectedAttribute+"\" Ratings");
     });
 
     if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
