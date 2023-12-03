@@ -27,10 +27,18 @@
         window.location.href = 'birthplaces.html';
     }
     });
+    document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+        window.location.href = 'conclusion.html';
+    }
+    });
 </script>
 <div class="arrow-container">
     <a href="birthplaces.html" class="arrow-link" style="left: 10px;">
         ←
+    </a>
+    <a href="conclusion.html" class="arrow-link" style="right: 10px;">
+        →
     </a>
 </div>
 </body>
