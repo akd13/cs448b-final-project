@@ -153,20 +153,20 @@ function Legend(color, {
 
 
 d3.csv("data/ted_speakers_birth.csv").then(function (data) {
-    /*
-    const legend = Legend(d3.scaleSqrt([1, 60], ['FD6868', "#0E2720"]), {
-        title: "Number of Languages ->"
-    })
-    d3.select("#viz1-svg").node().appendChild(legend);
-    */
+
+  const legend = Legend(d3.scaleSqrt([1, 60], ["#FFFFFF", "#a9081a"]), {
+      title: "Number of Languages ->"
+  })
+  d3.select("#viz1-legend").node().appendChild(legend);
 
   const svg = d3
     .select("#viz1-svg")
     .append("svg")
+      .attr("id", "viz1-svg-main")
     .attr("width", '100vw')
     .attr("height", '100vh');
 
-  var myColor = d3.scaleLinear().domain([1, 72]).range(["#FF7676", "#461313"]);
+  var myColor = d3.scaleLinear().domain([1, 72]).range(["#FFFFFF", "#a9081a"]);
 
   function ticked(selectedCountry) {
     svg
@@ -193,7 +193,7 @@ d3.csv("data/ted_speakers_birth.csv").then(function (data) {
       .text(
         (d) =>
           `Views: ${d.views} \n
-           Languages: ${d.languages} \n
+           Languages: ${d.languages}
           `
       );
   }
