@@ -120,7 +120,19 @@ function updatePlot() {
                 }))
             .selectAll("text")
             .style("font-size", "18px");
-        updateCircles(data);
+        updateCircles(currentData);
+        // let rSquared = calculateR2(currentData, d => d[selectedAttribute], d => d.views);
+        //
+        // svg.select(".r2-text").remove();
+        // svg.append("text")
+        //     .attr("class", "r2-text")
+        //     .attr("x", width)
+        //     .attr("y", 0)
+        //     .style("text-anchor", "end")
+        //     .style("fill", "white")
+        //     .style("font-size", "14px")
+        //     .text(`R²: ${rSquared.toFixed(2)}`);
+        //
         // Update the text of the x-axis label
         svg.select(".x-axis-label")
             .text("Number of \""+selectedAttribute+"\" Ratings");
@@ -240,6 +252,29 @@ function drawLineOfBestFit(data) {
         svg.selectAll(`.${lineClass}`).remove();
     }
 }
+
+function calculateR2(data, xValueAccessor, yValueAccessor) {
+    const xMean = d3.mean(data, xValueAccessor);
+    const yMean = d3.mean(data, yValueAccessor);
+    let num = 0;
+    let den = 0;
+    data.forEach(d => {
+        num += (xValueAccessor(d) - xMean) * (yValueAccessor(d) - yMean);
+        den += Math.pow(xValueAccessor(d) - xMean, 2);
+    });
+    const m = num / den;
+    const b = yMean - m * xMean;
+
+    let ssTot = 0;
+    let ssRes = 0;
+    data.forEach(d => {
+        const yPredicted = m * xValueAccessor(d) + b;
+        ssTot += Math.pow(yValueAccessor(d) - yMean, 2);
+        ssRes += Math.pow(yValueAccessor(d) - yPredicted, 2);
+    });
+    return 1 - (ssRes / ssTot);
+}
+
 d3.select("#lineOfBestFitCheckbox").on("change", function() {
     drawLineOfBestFit(currentData);
 });
