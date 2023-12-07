@@ -17,8 +17,22 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+#viz1-svg,
+#viz2-svg {
+  width: 50%; 
+  box-sizing: border-box; 
+}
+
 #viz1-svg {
-    display: block;
+  float: left;
+}
+
+#viz2-svg {
+  float: right; 
+}
+  
+.arrow-container {
+    clear: both; 
 }
 
 #text-page {
