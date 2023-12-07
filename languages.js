@@ -7,7 +7,7 @@ var margin = { top: 30, right: 30, bottom: 70, left: 60 },
     .select("#viz1-svg")
     .append("svg")
       .attr("id", "viz1-svg-main")
-      .attr("width", '100vw')
+      .attr("width", '150vw')
       .attr("height", '100vh')
     .append("g")
       .attr("transform",
@@ -17,7 +17,7 @@ var margin = { top: 30, right: 30, bottom: 70, left: 60 },
     .select("#viz2-svg")
     .append("svg")
       .attr("id", "viz2-svg-main")
-      .attr("width", '100vw')
+      .attr("width", '200vw')
       .attr("height", '100vh')
     .append("g")
       .attr("transform",
@@ -30,10 +30,10 @@ d3.csv("data/occupation_views_averaged.csv").then(function (data) {
   .domain(data.map(function(d) { return d.Occupation_cluster; }))
   .padding(0.2);
 svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
+  .attr("transform", "translate(0," + (height - 10) + ")")
   .call(d3.axisBottom(x))
   .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
+    .attr("transform", "translate(-10,0)rotate(-90)")
     .style("text-anchor", "end")
     .style("fill", "#fcdcbf");
 
@@ -63,6 +63,7 @@ svg.selectAll("mybar")
    })
    .on("mouseout", function() { 
     d3.select(this).attr("fill", "red")
+    svg2.selectAll("*").remove();
  });
 })
 
@@ -78,7 +79,7 @@ svg2.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x2))
   .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
+    .attr("transform", "translate(-10,0)rotate(-90)")
     .style("text-anchor", "end")
     .style("fill", "#fcdcbf");
 
