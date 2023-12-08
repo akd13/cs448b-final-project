@@ -7,7 +7,7 @@ var margin = { top: 30, right: 30, bottom: 70, left: 60 },
     .select("#viz1-svg")
     .append("svg")
       .attr("id", "viz1-svg-main")
-      .attr("width", '150vw')
+      .attr("width", '50vw')
       .attr("height", '100vh')
     .append("g")
       .attr("transform",
@@ -17,7 +17,7 @@ var margin = { top: 30, right: 30, bottom: 70, left: 60 },
     .select("#viz2-svg")
     .append("svg")
       .attr("id", "viz2-svg-main")
-      .attr("width", '200vw')
+      .attr("width", '50vw')
       .attr("height", '100vh')
     .append("g")
       .attr("transform",
@@ -33,7 +33,7 @@ svg.append("g")
   .attr("transform", "translate(0," + (height - 10) + ")")
   .call(d3.axisBottom(x))
   .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-90)")
+    .attr("transform", "translate(-10,15)rotate(-90)")
     .style("text-anchor", "end")
     .style("fill", "#fcdcbf");
 
@@ -70,16 +70,17 @@ svg.selectAll("mybar")
 function showClusterDetails(clusterName) {
   svg2.selectAll("*").remove();
   d3.csv(clusterName).then(function (data2) {
+  
 
   var x2 = d3.scaleBand()
   .range([ 0, width ])
-  .domain(data2.map(function(d) { return d.Occupation; }))
+  .domain(data2.map(function(d) { return d.Occupation; }).slice(0,10))
   .padding(0.2);
 svg2.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x2))
   .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-90)")
+    .attr("transform", "translate(-10,10)rotate(-90)")
     .style("text-anchor", "end")
     .style("fill", "#fcdcbf");
 
