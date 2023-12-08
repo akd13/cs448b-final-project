@@ -61,20 +61,21 @@ instructionText.append("tspan")
     .attr("dy", "1.2em")
     .text("double click to zoom out");
 
+instructionText.append("tspan")
+    .attr("x", width / 2)
+    .attr("dy", "1.2em")
+    .text("click on point to go to video");
+
 // Dropdown Selection Handling
-var selectedAttribute = 'Funny', selectedLocation = 'Americas';
+var selectedAttribute = 'Funny';
 const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
-const attributes_location = ['Americas', "Europe"];
 var currentData = [];
 d3.select("#attribute-selector-rating").selectAll("option").data(attributes_rating).enter()
-    .append("option").text(d => d).attr("value", d => d);
-d3.select("#attribute-selector-location").selectAll("option").data(attributes_location).enter()
     .append("option").text(d => d).attr("value", d => d);
 
 d3.selectAll("#attribute-selector-rating, #attribute-selector-location")
     .on('change', function() {
         selectedAttribute = d3.select("#attribute-selector-rating").property('value');
-        selectedLocation = d3.select("#attribute-selector-location").property('value');
         updatePlot();
     });
 updatePlot();
@@ -82,10 +83,10 @@ updatePlot();
 /**********************/
 // Update Plot Function
 function updatePlot() {
-    const location_data = selectedLocation === 'Americas' ? 'data/americas.csv' : 'data/europe.csv';
+    const location_data = 'data/ratings.csv';
 
     // Update or append title
-    var title = svg.selectAll(".chart-title").data([selectedLocation]);
+    var title = svg.selectAll(".chart-title").data([null]);
     title.enter()
         .append("text")
         .attr("class", "chart-title")
@@ -96,7 +97,7 @@ function updatePlot() {
         .style("font-size", "20px")
         .style("fill", "#fcdcbf")
         .style("font-family", "Karla; sans-serif")
-        .text(d => d);
+        .text("Views vs Number of \""+selectedAttribute+"\" Ratings");
 
     d3.csv(location_data).then(data => {
         data.forEach(d => {
@@ -135,7 +136,7 @@ function updatePlot() {
         //
         // Update the text of the x-axis label
         svg.select(".x-axis-label")
-            .text("Number of \""+selectedAttribute+"\" Ratings");
+            .text(selectedAttribute);
     });
 
     if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
@@ -169,10 +170,10 @@ function updateCircles(data) {
 
     // Add title to both entered and updated circles
     enterCircles.append('title')
-        .text(d => `${d.main_speaker}: ${d.city}`);
+        .text(d => `${d.main_speaker}: ${d.title}`);
 
     circles.select('title')
-        .text(d => `${d.main_speaker}: ${d.city}`);
+        .text(d => `${d.main_speaker}: ${d.title}`);
 
     circles.exit().remove();
     if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
