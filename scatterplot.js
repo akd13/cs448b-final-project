@@ -64,11 +64,11 @@ instructionText.append("tspan")
 instructionText.append("tspan")
     .attr("x", width / 2)
     .attr("dy", "1.2em")
-    .text("click to go to TED talk");
+    .text("click to open TED talk");
 
 // Dropdown Selection Handling
-var selectedAttribute = 'All';
-const attributes_rating = ['All','Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
+var selectedAttribute = 'Funny';
+const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
 var currentData = [];
 d3.select("#attribute-selector-rating").selectAll("option").data(attributes_rating).enter()
     .append("option").text(d => d).attr("value", d => d);
@@ -105,13 +105,8 @@ function updatePlot() {
             d.views = +d.views;
         });
         currentData = data;
-        if (selectedAttribute === 'All') {
-            xAxis.domain([0, d3.max(data, d => d3.max(attributes_rating, attr => d[attr]))]);
-        } else {
-            xAxis.domain([0, d3.max(data, d => d[selectedAttribute])]);
-        }
-        // xAxis.domain([0, d3.max(data, d => d[selectedAttribute])]);
-        yAxis.domain([0, d3.max(data, d => d.views)]);
+        xAxis.domain([0, d3.max(data, d => d[selectedAttribute]*1.10)]); //times 1.1 to see it clearly
+        yAxis.domain([0, d3.max(data, d => d.views*1.10)]);
         xAxisGroup
             .call(d3.axisBottom(xAxis)
                 .tickSize(5)
@@ -174,11 +169,7 @@ function updateCircles(data) {
         .transition()
         .duration(1000)
         //if selection is "all", display everything
-        .attr("cx", d => { if (selectedAttribute === 'All') {
-            return xAxis(d[attributes_rating[Math.floor(Math.random() * attributes_rating.length)]]);
-        } else {
-            return xAxis(d[selectedAttribute]);
-        }})
+        .attr("cx", d => xAxis(d[selectedAttribute]))
         .attr("cy", d => yAxis(d.views));
 
 
@@ -222,12 +213,7 @@ function updateChart(event, data) {
     scatter.selectAll("circle")
         .transition()
         .duration(1000)
-        .attr("cx", d => {
-            if (selectedAttribute === 'All') {
-                return xAxis(d[attributes_rating[Math.floor(Math.random() * attributes_rating.length)]]);
-            }
-            return xAxis(d[selectedAttribute]);
-        })
+        .attr("cx", d => xAxis(d[selectedAttribute]))
         .attr("cy", d => yAxis(d.views));
 
     if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
