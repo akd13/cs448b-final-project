@@ -25,6 +25,14 @@
     box-sizing: border-box;
     height: 100px;
     margin-bottom: 0;
+    overflow: visible;
+}
+#viz1-svg-main, #viz2-svg-main {
+    overflow: visible;
+}
+
+#viz1-svg-main {
+   transform: translateX(10%);
 }
 
 #viz-container {
