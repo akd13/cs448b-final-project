@@ -43,8 +43,10 @@ var y = d3.scaleLinear()
   .domain([0, 5613145])
   .range([ height, 0]);
 svg.append("g")
-  .call(d3.axisLeft(y))
-  .selectAll("text")
+  .call(d3.axisLeft(y).tickFormat(function(d){
+      return d / 1000000 + 'M';
+    }))
+    .selectAll("text")
     .style("fill", "#fcdcbf")
     .style("font-size", "16px");
 
@@ -72,12 +74,12 @@ svg.selectAll("mybar")
 function showClusterDetails(clusterName) {
   svg2.selectAll("*").remove();
   d3.csv(clusterName).then(function (data2) {
-  
 
   var x2 = d3.scaleBand()
   .range([ 0, width ])
   .domain(data2.map(function(d) { return d.Occupation; }).slice(0,10))
   .padding(0.2);
+
 svg2.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x2))
@@ -92,7 +94,9 @@ var y2 = d3.scaleLinear()
   .domain([0, 5613145])
   .range([ height, 0]);
 svg2.append("g")
-  .call(d3.axisLeft(y2))
+    .call(d3.axisLeft(y2).tickFormat(function(d){
+      return d / 1000000 + 'M';
+    }))
   .selectAll("text")
     .style("fill", "#fcdcbf")
     .style("font-size", "16px");
@@ -105,7 +109,9 @@ svg2.selectAll("mybar2")
     .attr("x", function(d) { return x2(d.Occupation); })
     .attr("y", function(d) { return y2(d.Views); })
     .attr("width", x2.bandwidth())
-    .attr("height", function(d) { return height - y2(d.Views); })
+    .attr("height", function(d) {
+        return height - y2(d.Views); }
+    )
     .attr("fill", "yellow")
 })
 }

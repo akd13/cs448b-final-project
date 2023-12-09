@@ -2,7 +2,7 @@
 #viz1 {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
-    overflow: scroll; 
+    overflow: scroll;
     margin-top: 50px;
 }
 
@@ -21,23 +21,21 @@
 
 #viz1-svg,
 #viz2-svg {
-  box-sizing: border-box;
-    /*display: block;*/
-    /*display: block;*/
-    /*width: 40px;*/
+    box-sizing: border-box;
     height: 100px;
-    /*overflow: visible;*/
-    /*position: relative;*/
+    margin-bottom: 0;
 }
 
 #viz-container {
-  display: flex;
-  width: 100vw;
+    display: flex;
+    width: 100is;
+    align-items: center;
+    gap: 0;
 }
-  
+
 
 .arrow-container {
-  clear: both;
+    clear: both;
 }
 
 
@@ -377,13 +375,13 @@ body {
 }
 
 @keyframes flash {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
 .instruction-text, #link-lang {
-  animation: flash 2s linear infinite;
+    animation: flash 2s linear infinite;
 }
 
 /*#viz3-svg {*/
