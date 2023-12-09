@@ -61,20 +61,21 @@ instructionText.append("tspan")
     .attr("dy", "1.2em")
     .text("double click to zoom out");
 
+instructionText.append("tspan")
+    .attr("x", width / 2)
+    .attr("dy", "1.2em")
+    .text("click to open TED talk");
+
 // Dropdown Selection Handling
-var selectedAttribute = 'Funny', selectedLocation = 'Americas';
+var selectedAttribute = 'Funny';
 const attributes_rating = ['Funny', 'Courageous', 'Confusing', 'Beautiful', 'Unconvincing', 'Longwinded', 'Informative', 'Inspiring', 'Fascinating', 'Ingenious', 'Persuasive', 'Jaw-dropping', 'Obnoxious', 'OK'];
-const attributes_location = ['Americas', "Europe"];
 var currentData = [];
 d3.select("#attribute-selector-rating").selectAll("option").data(attributes_rating).enter()
-    .append("option").text(d => d).attr("value", d => d);
-d3.select("#attribute-selector-location").selectAll("option").data(attributes_location).enter()
     .append("option").text(d => d).attr("value", d => d);
 
 d3.selectAll("#attribute-selector-rating, #attribute-selector-location")
     .on('change', function() {
         selectedAttribute = d3.select("#attribute-selector-rating").property('value');
-        selectedLocation = d3.select("#attribute-selector-location").property('value');
         updatePlot();
     });
 updatePlot();
@@ -82,10 +83,10 @@ updatePlot();
 /**********************/
 // Update Plot Function
 function updatePlot() {
-    const location_data = selectedLocation === 'Americas' ? 'data/americas.csv' : 'data/europe.csv';
+    const location_data = 'data/ratings.csv';
 
     // Update or append title
-    var title = svg.selectAll(".chart-title").data([selectedLocation]);
+    var title = svg.selectAll(".chart-title").data([null]);
     title.enter()
         .append("text")
         .attr("class", "chart-title")
@@ -96,7 +97,7 @@ function updatePlot() {
         .style("font-size", "20px")
         .style("fill", "#fcdcbf")
         .style("font-family", "Karla; sans-serif")
-        .text(d => d);
+        .text("Views vs Number of \""+selectedAttribute+"\" Ratings");
 
     d3.csv(location_data).then(data => {
         data.forEach(d => {
@@ -104,8 +105,8 @@ function updatePlot() {
             d.views = +d.views;
         });
         currentData = data;
-        xAxis.domain([0, d3.max(data, d => d[selectedAttribute])]);
-        yAxis.domain([0, d3.max(data, d => d.views)]);
+        xAxis.domain([0, d3.max(data, d => d[selectedAttribute]*1.10)]); //times 1.1 to see it clearly
+        yAxis.domain([0, d3.max(data, d => d.views*1.10)]);
         xAxisGroup
             .call(d3.axisBottom(xAxis)
                 .tickSize(5)
@@ -121,21 +122,10 @@ function updatePlot() {
             .selectAll("text")
             .style("font-size", "18px");
         updateCircles(currentData);
-        // let rSquared = calculateR2(currentData, d => d[selectedAttribute], d => d.views);
-        //
-        // svg.select(".r2-text").remove();
-        // svg.append("text")
-        //     .attr("class", "r2-text")
-        //     .attr("x", width)
-        //     .attr("y", 0)
-        //     .style("text-anchor", "end")
-        //     .style("fill", "white")
-        //     .style("font-size", "14px")
-        //     .text(`R²: ${rSquared.toFixed(2)}`);
-        //
+
         // Update the text of the x-axis label
         svg.select(".x-axis-label")
-            .text("Number of \""+selectedAttribute+"\" Ratings");
+            .text(selectedAttribute);
     });
 
     if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
@@ -157,22 +147,27 @@ function updateCircles(data) {
         })
         .on('mouseout', function() {
             //remove tooltip
-            d3.select(this).attr('stroke', null);
+            d3.select(this).attr('stroke', null)
         })
+        .on('click', function(event, d) {
+            console.log(d,"inside click");
+            window.open(d.url, '_blank');
+        });
 
     circles.merge(enterCircles)
         .transition()
         .duration(1000)
+        //if selection is "all", display everything
         .attr("cx", d => xAxis(d[selectedAttribute]))
         .attr("cy", d => yAxis(d.views));
 
 
     // Add title to both entered and updated circles
     enterCircles.append('title')
-        .text(d => `${d.main_speaker}: ${d.city}`);
+        .text(d => `${d.main_speaker}: ${d.title}`);
 
     circles.select('title')
-        .text(d => `${d.main_speaker}: ${d.city}`);
+        .text(d => `${d.main_speaker}: ${d.title}`);
 
     circles.exit().remove();
     if (d3.select("#lineOfBestFitCheckbox").property("checked")) {
@@ -251,28 +246,6 @@ function drawLineOfBestFit(data) {
     } else {
         svg.selectAll(`.${lineClass}`).remove();
     }
-}
-
-function calculateR2(data, xValueAccessor, yValueAccessor) {
-    const xMean = d3.mean(data, xValueAccessor);
-    const yMean = d3.mean(data, yValueAccessor);
-    let num = 0;
-    let den = 0;
-    data.forEach(d => {
-        num += (xValueAccessor(d) - xMean) * (yValueAccessor(d) - yMean);
-        den += Math.pow(xValueAccessor(d) - xMean, 2);
-    });
-    const m = num / den;
-    const b = yMean - m * xMean;
-
-    let ssTot = 0;
-    let ssRes = 0;
-    data.forEach(d => {
-        const yPredicted = m * xValueAccessor(d) + b;
-        ssTot += Math.pow(yValueAccessor(d) - yMean, 2);
-        ssRes += Math.pow(yValueAccessor(d) - yPredicted, 2);
-    });
-    return 1 - (ssRes / ssTot);
 }
 
 d3.select("#lineOfBestFitCheckbox").on("change", function() {

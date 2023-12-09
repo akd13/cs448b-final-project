@@ -354,15 +354,14 @@ body {
 
 #selectors-viz3 {
     position: absolute;
-    top: 20%;
-    right: 5%;
+    top: 9.5%;
+    right: 15%;
     background-color: rgba(5, 4, 4, 0.51);
     padding: 10px;
     border-radius: 5px;
 }
 
-#attribute-selector-rating,
-#attribute-selector-location {
+#attribute-selector-rating {
     margin: 5px;
     padding: 5px;
     border-radius: 5px;
