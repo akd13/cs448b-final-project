@@ -6,20 +6,19 @@
     margin-top: 50px;
 }
 
-#viz1-heading {
+#viz1-heading, #viz1-heading-outside {
     font-family: "Karla","sans-serif";
     font-size: 30px;
     font-weight: 400;
     pointer-events: none !important;
     cursor: pointer;
     text-align: center;
-    color: rgba(252, 220, 191, 0);
+    color: #fcdcbf;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     width: 100%; /* Set the width to take up the full container width */
     margin: 0 auto; /* Center the element within its container */
-    transform: translateY(-120%); /* Adjust if needed for vertical alignment */
+    /*transform: translateY(-100%); !* Adjust if needed for vertical alignment *!*/
 }
-
 
 #viz1-svg,
 #viz2-svg {
@@ -30,7 +29,6 @@
 
 #viz-container {
     display: flex;
-    width: 100is;
     align-items: center;
     gap: 0;
 }
@@ -206,16 +204,17 @@ body {
     color: #fcdcbf;
     pointer-events: auto;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    z-index: 1000;
     position: absolute;
-    margin: 10px;
-    padding: 10px 20px;
     cursor: pointer;
     background-color: rgba(5, 4, 4, 0.58);
     border: none;
     border-radius: 5px;
-    top: 20px;
-    left: 20px;
+    top:20px;
+    transform: translateX(-50%);
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: fit-content;
 }
 
 .cities-list {

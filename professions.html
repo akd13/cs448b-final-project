@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Visualisation 1</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-  </head>
-  <body id="viz1">
-    <div id="viz-container">
-    <div id="languages"></div>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <h2 id="viz1-heading">
-      Professional Background
-    </h2>
-    <div id="viz1-svg">
-    </div>
-    <div id="viz2-svg">
-    </div>
-    </div>
-    <script src="professions.js"></script>
-    <script>
-        // navigate left and right
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'ArrowRight') {
-            window.location.href = 'viz1-recap.html';
-        }
-    });
-    document.addEventListener('keyup', function(event) {
-        if (event.key === 'ArrowLeft') {
-            window.location.href = 'index.html';
-        }
-    });
-    </script>
-    <div class="arrow-container">
-        <a href="index.html" class="arrow-link" style="left: 10px;">
-          ←
-        </a>
-        <a href="viz1-recap.html" class="arrow-link" style="right: 10px;">
-          →
-        </a>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualisation 1</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+</head>
+<body id="viz1">
+<h2 id="viz1-heading-outside">
+  Professional Background: Is your vocation interesting?
+</h2>
+<div id="viz-container">
+  <div id="languages"></div>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <h2 id="viz1-heading">
+    Professional Background
+  </h2>
+  <div id="viz1-svg">
+  </div>
+  <div id="viz2-svg">
+  </div>
+</div>
+<script src="professions.js"></script>
+<script>
+  // navigate left and right
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+      window.location.href = 'viz1-recap.html';
+    }
+  });
+  document.addEventListener('keyup', function(event) {
+    if (event.key === 'ArrowLeft') {
+      window.location.href = 'index.html';
+    }
+  });
+</script>
+<div class="arrow-container">
+  <a href="index.html" class="arrow-link" style="left: 10px;">
+    ←
+  </a>
+  <a href="viz1-recap.html" class="arrow-link" style="right: 10px;">
+    →
+  </a>
+</div>
+</body>
 </html>
