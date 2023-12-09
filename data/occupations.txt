@@ -3,7 +3,7 @@ Climate advocate: Environment and Sustainability
 Technology columnist: Science and Technology
 Activist for environmental justice: Environment and Sustainability
 Global health expert; data visionary: Health and Medicine
-Life coach; expert in leadership psychology: Philosophy and Thought Leadership
+Life coach: Philosophy and Thought Leadership
 Actor, comedian, playwright: Arts and Entertainment
 Architect: Architecture and Design
 Philosopher, cognitive scientist: Science and Technology
@@ -73,7 +73,7 @@ Singer, performance artist: Arts and Entertainment
 Designer; creative director, Ideo: Architecture and Design
 Artist: Arts and Entertainment
 Philosopher: Philosophy and Thought Leadership
-Science writer, innovation consultant, conservationist: Creative Writing and Digital Content
+Conservationist: Creative Writing and Digital Content
 Biologist, genetics pioneer: Physical and Earth Sciences
 Experimental audio-visual artist: Arts and Entertainment
 Primate authority: Education and Academia
@@ -284,7 +284,7 @@ Neuroscientist: Science and Technology
 Polymorphic playwright: Arts and Entertainment
 Science journalist: Media and Journalism
 Physicist and military theorist: Physical and Earth Sciences
-Astronaut, engineer, entrepreneur, physician and educator: Science and Technology
+Astronaut, engineer, doctor: Science and Technology
 Food and agriculture expert: General
 Technologist and visionary: Science and Technology
 A capella ensemble: General
@@ -308,7 +308,7 @@ Anthropologist: Anthropology and Sociology
 British Prime Minister: General
 Aquatic ape theorist: General
 Micro-sculptor: General
-Chief Economist and Senior Vice President, World Bank: Business and Economics
+ Economist, World Bank: Business and Economics
 Hip-hop artist: Arts and Entertainment
 Career analyst: General
 Wireless electrician: General

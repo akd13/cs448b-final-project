@@ -1,6 +1,6 @@
 var margin = { top: 30, right: 30, bottom: 70, left: 60 },
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = window.innerWidth - margin.left*12 - margin.right*10,
+    height = window.innerHeight - margin.top - margin.bottom*5;
 
 
     const svg = d3
@@ -35,7 +35,8 @@ svg.append("g")
   .selectAll("text")
     .attr("transform", "translate(-10,15)rotate(-90)")
     .style("text-anchor", "end")
-    .style("fill", "#fcdcbf");
+    .style("fill", "#fcdcbf")
+    .style("font-size", "16px");
 
 // Add Y axis
 var y = d3.scaleLinear()
@@ -44,7 +45,8 @@ var y = d3.scaleLinear()
 svg.append("g")
   .call(d3.axisLeft(y))
   .selectAll("text")
-    .style("fill", "#fcdcbf");
+    .style("fill", "#fcdcbf")
+    .style("font-size", "16px");
 
 // Bars
 svg.selectAll("mybar")
@@ -82,7 +84,8 @@ svg2.append("g")
   .selectAll("text")
     .attr("transform", "translate(-10,10)rotate(-90)")
     .style("text-anchor", "end")
-    .style("fill", "#fcdcbf");
+    .style("fill", "#fcdcbf")
+    .style("font-size", "16px");
 
 // Add Y axis
 var y2 = d3.scaleLinear()
@@ -91,7 +94,8 @@ var y2 = d3.scaleLinear()
 svg2.append("g")
   .call(d3.axisLeft(y2))
   .selectAll("text")
-    .style("fill", "#fcdcbf");
+    .style("fill", "#fcdcbf")
+    .style("font-size", "16px");
 
 // Bars
 svg2.selectAll("mybar2")

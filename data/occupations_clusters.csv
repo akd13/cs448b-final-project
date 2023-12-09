@@ -4,7 +4,7 @@ Al Gore,3200520,Climate advocate,Environment and Sustainability
 David Pogue,1636292,Technology columnist,Science and Technology
 Majora Carter,1697550,Activist for environmental justice,Environment and Sustainability
 Hans Rosling,12005869,Global health expert; data visionary,Health and Medicine
-Tony Robbins,20685401,Life coach; expert in leadership psychology,Philosophy and Thought Leadership
+Tony Robbins,20685401,Life coach,Philosophy and Thought Leadership
 Julia Sweeney,3769987,"Actor, comedian, playwright",Arts and Entertainment
 Joshua Prince-Ramus,967741,Architect,Architecture and Design
 Dan Dennett,2567958,"Philosopher, cognitive scientist",Science and Technology
@@ -64,7 +64,7 @@ Nora York,395769,"Singer, performance artist",Arts and Entertainment
 Paul Bennett,761930,"Designer; creative director, Ideo",Architecture and Design
 Vik Muniz,1149090,Artist,Arts and Entertainment
 Nick Bostrom,762264,Philosopher,Philosophy and Thought Leadership
-Janine Benyus,1920434,"Science writer, innovation consultant, conservationist",Creative Writing and Digital Content
+Janine Benyus,1920434,"Conservationist",Creative Writing and Digital Content
 Craig Venter,560904,"Biologist, genetics pioneer",Physical and Earth Sciences
 Golan Levin,606311,Experimental audio-visual artist,Arts and Entertainment
 Susan Savage-Rumbaugh,2197377,Primate authority,Education and Academia
@@ -309,7 +309,7 @@ Michael Merzenich,1237391,Neuroscientist,Science and Technology
 Sarah Jones,1607397,Polymorphic playwright,Arts and Entertainment
 Laurie Garrett,425429,Science journalist,Media and Journalism
 Sean Gourley,909309,Physicist and military theorist,Physical and Earth Sciences
-Mae Jemison,744257,"Astronaut, engineer, entrepreneur, physician and educator",Science and Technology
+Mae Jemison,744257,"Astronaut, engineer, doctor",Science and Technology
 Al Gore,775430,Climate advocate,Environment and Sustainability
 Seth Godin,1985679,Marketer and author,Education and Academia
 Eric Lewis,391427,Pianist,Performing Arts and Music
@@ -346,8 +346,8 @@ Nina Jablonski,996694,Anthropologist,Anthropology and Sociology
 Alain de Botton,5790615,Philosopher,Philosophy and Thought Leadership
 Golan Levin,771144,Experimental audio-visual artist,Arts and Entertainment
 Michael Pritchard,3573198,Inventor,Science and Technology
-Paul Romer,572392,"Chief Economist and Senior Vice President, World Bank",Business and Economics
-Janine Benyus,1118954,"Science writer, innovation consultant, conservationist",Creative Writing and Digital Content
+Paul Romer,572392," Economist, World Bank",Business and Economics
+Janine Benyus,1118954,"Conservationist",Creative Writing and Digital Content
 Emmanuel Jal,776516,Hip-hop artist,Arts and Entertainment
 Hans Rosling,1471039,Global health expert; data visionary,Health and Medicine
 Natasha Tsakos,389813,Artist,Arts and Entertainment
@@ -629,7 +629,7 @@ Aaron O'Connell,1272198,Physicist,Physical and Earth Sciences
 Jessi Arrington,1202928,Designer,Architecture and Design
 Damon Horowitz,681873,"Philosopher, entrepreneur",Business and Economics
 Janet Echelman,1832930,Artist,Arts and Entertainment
-Paul Romer,461382,"Chief Economist and Senior Vice President, World Bank",Business and Economics
+Paul Romer,461382," Economist, World Bank",Business and Economics
 Daniel Kraft,869847,Physician scientist,Science and Technology
 Shea Hembrey,1486880,Artist and curator,Arts and Entertainment
 Steve Keil,602203,Entrepreneur,Business and Economics
