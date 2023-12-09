@@ -9,7 +9,7 @@ const svg = d3
     .attr("id", "viz1-svg-main")
     .attr("width", '50vw')
     .attr("height", '100vh')
-    .style("margin-left", "10vw")
+    // .style("margin-left", "5vw")
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
