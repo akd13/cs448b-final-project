@@ -7,14 +7,13 @@
 }
 
 #viz1-heading {
-    /*position: absolute;*/
     font-family: "Karla","sans-serif";
     font-size: 30px;
     font-weight: 400;
     pointer-events: none !important;
     cursor: pointer;
     text-align: center;
-    color: #fcdcbf;
+    color: rgba(252, 220, 191, 0);
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     width: 100%; /* Set the width to take up the full container width */
     margin: 0 auto; /* Center the element within its container */

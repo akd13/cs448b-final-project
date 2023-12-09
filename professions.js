@@ -9,6 +9,7 @@ const svg = d3
     .attr("id", "viz1-svg-main")
     .attr("width", '50vw')
     .attr("height", '100vh')
+    .style("margin-left", "10vw")
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
@@ -19,6 +20,7 @@ const svg2 = d3
     .attr("id", "viz2-svg-main")
     .attr("width", '50vw')
     .attr("height", '100vh')
+    // .style("margin-right", "40px")
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
@@ -33,12 +35,12 @@ d3.csv("data/occupation_views_averaged.csv").then(function (data) {
         .attr("transform", "translate(0," + (height - 10) + ")")
         .call(d3.axisBottom(x))
         .selectAll("text")
-        .attr("transform", "translate(-10,15)rotate(-90)")
+        .attr("transform", "translate(-10,15)rotate(-45)")
         .style("text-anchor", "end")
         .style("fill", "#fcdcbf")
         .style("font-size", "16px");
 
-// Add Y axis
+    // Add Y axis
     var y = d3.scaleLinear()
         .domain([0, 5613145])
         .range([ height, 0]);
@@ -50,7 +52,6 @@ d3.csv("data/occupation_views_averaged.csv").then(function (data) {
         .style("fill", "#fcdcbf")
         .style("font-size", "16px");
 
-// Bars
     svg.selectAll("mybar")
         .data(data)
         .enter()
@@ -86,7 +87,7 @@ function showClusterDetails(clusterName) {
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x2))
             .selectAll("text")
-            .attr("transform", "translate(-10,10)rotate(-90)")
+            .attr("transform", "translate(-10,10)rotate(-45)")
             .style("text-anchor", "end")
             .style("fill", "#fcdcbf")
             .style("font-size", "16px");
