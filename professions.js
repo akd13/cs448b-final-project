@@ -25,6 +25,19 @@ const svg2 = d3
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
+const instructionText = svg.append("text")
+    .attr("class", "instruction-text")
+    .attr("x", width / 6)
+    .attr("y", height / 6)
+    .attr("text-anchor", "middle")
+    .style("fill", "white")
+    .style("font-size", "16px")
+    .style("font-family", "Karla; sans-serif")
+
+instructionText.append("tspan")
+    .attr("x", width / 2)
+    .attr("dy", "-0.6em")
+    .text("mousover bars to see details");
 d3.csv("data/occupation_views_averaged.csv").then(function (data) {
 
     var x = d3.scaleBand()
@@ -62,6 +75,7 @@ d3.csv("data/occupation_views_averaged.csv").then(function (data) {
         .attr("height", function(d) { return height - y(d.Views); })
         .attr("fill", "red")
         .on("mouseover", function(event, d) {
+            svg.select(".instruction-text").remove();
             d3.select(this).attr("fill", "#69b3a2")
             var clusterName = "data/" + d.Occupation_cluster + ".csv"
             showClusterDetails(clusterName);
