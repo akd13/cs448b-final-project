@@ -18,7 +18,7 @@
   <br> <br>
   The verdict? Anything that elicits a strong reaction commands the TED stage!
   <br> <br>
-  Not finished? Use our predictive tool below to see if your talk is popular!
+  Not finished? Use our tool below to see if your talk is going to popular!
 </p>
 <div class="dropdown-container">
   <div>
@@ -35,53 +35,68 @@
 
 <p id="prediction-result"></p>
 <script>
-  async function fetchData(url) {
-    const response = await fetch(url);
-    const data = await response.text();
-    return d3.csvParse(data);
+  const pointsData = {
+    professions: [],
+    cities: [],
+    ratings: []
+  };
+
+  function fetchData(url) {
+    return fetch(url)
+      .then(response => response.text())
+      .then(data => d3.csvParse(data));
   }
 
-  async function populateDropdowns() {
-    const data = await fetchData('data/predict.csv');
+  function populateDropdowns() {
+    Promise.all([
+      fetchData('data/profession-points.csv'),
+      fetchData('data/city-points.csv'),
+      fetchData('data/ratings-points.csv')
+    ]).then(([professionData, cityData, ratingData]) => {
+      pointsData.professions = professionData;
+      pointsData.cities = cityData;
+      pointsData.ratings = ratingData;
 
-    const professionDropdown = document.getElementById('professions');
-    const cityDropdown = document.getElementById('cities');
-    const ratingDropdown = document.getElementById('ratings');
+      const professionDropdown = document.getElementById('professions');
+      const cityDropdown = document.getElementById('cities');
+      const ratingDropdown = document.getElementById('ratings');
 
-    const uniqueProfessions = Array.from(new Set(data.map(d => d.profession)));
-    const uniqueCities = Array.from(new Set(data.map(d => d.city)));
-    const uniqueRatings = Array.from(new Set(data.map(d => d.rating)));
-
-    uniqueProfessions.forEach(profession => {
-      const option = document.createElement('option');
-      option.value = profession;
-      option.textContent = profession;
-      professionDropdown.appendChild(option);
+      populateDropdown(professionDropdown, professionData);
+      populateDropdown(cityDropdown, cityData);
+      populateDropdown(ratingDropdown, ratingData);
     });
+  }
 
-    uniqueCities.forEach(city => {
-      const option = document.createElement('option');
-      option.value = city;
-      option.textContent = city;
-      cityDropdown.appendChild(option);
-    });
+  function populateDropdown(dropdown, data) {
+    const uniqueValues = Array.from(new Set(data.map(d => d.value)));
 
-    uniqueRatings.forEach(rating => {
+    uniqueValues.forEach(value => {
       const option = document.createElement('option');
-      option.value = rating;
-      option.textContent = rating;
-      ratingDropdown.appendChild(option);
+      option.value = value;
+      option.textContent = value;
+      dropdown.appendChild(option);
     });
   }
 
   function predictPopularity() {
-    const selectedProfession = document.getElementById('professions').value;
-    const selectedCity = document.getElementById('cities').value;
-    const selectedRating = document.getElementById('ratings').value;
+    Promise.all([
+      getPoints('professions'),
+      getPoints('cities'),
+      getPoints('ratings')
+    ]).then(([professionPoints, cityPoints, ratingPoints]) => {
+      console.log(professionPoints, cityPoints, ratingPoints);
+      const totalPoints = professionPoints + cityPoints + ratingPoints;
+      const predictionResult = totalPoints > 15 ? 'Be Popular' : 'Not Be Popular';
+      document.getElementById('prediction-result').innerText = `Your talk will: ${predictionResult}!`;
+    });
+  }
 
-    const predictionResult = Math.random() < 0.5 ? 'Popular' : 'Not Popular';
-    console.log(predictionResult)
-    document.getElementById('prediction-result').innerText = `Your talk will be ${predictionResult}!`;
+  function getPoints(dropdownId) {
+    const data = pointsData[dropdownId];
+    const dropdown = document.getElementById(dropdownId);
+    const selectedValue = dropdown.value;
+    const points = data.find(item => item.value === selectedValue)?.points || 0;
+    return parseInt(points);
   }
 
   document.addEventListener('DOMContentLoaded', populateDropdowns);
