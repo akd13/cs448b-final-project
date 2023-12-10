@@ -14,3 +14,9 @@
 6. [Brushing Scatterplot](https://d3-graph-gallery.com/graph/interactivity_brush.html)
 7. [Bar Plot](https://d3-graph-gallery.com/barplot)
 8. [Merge](https://stackoverflow.com/questions/47066905/d3-merge-function) 
+
+### Work Distribution 
+1. Narrative - Akankshita and Ananya
+2. Viz 1 - Ananya
+3. Viz 2 - Akankshita
+4. Viz 3 - Akankshita and Ananya 
