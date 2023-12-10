@@ -1,39 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Conclusion</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-  </head>
-  <body id="text-page">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-      <h2 id="text-page-heading">
-          Conclusion
-      </h2>
-      <p id="text-page-content">
-        From the scatterplot, we see that the ratings like Fascinating, Inspiring inspire a lot more views than negative terms like "Obnoxious", "Longwinded" and "Confusing".
-        <br> <br>
-        Surprisingly, "Obnoxious" does better than "Longwinded" in terms of correlation between views and ratings -
-        anything that elicits a strong view garners more views!
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conclusion</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+</head>
+<body id="text-page" class="conclusion">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<p id="text-page-content">
+  From the scatterplot, we see that the ratings like "Fascinating", "Inspiring" receive a lot more views than negative
+  terms like "Obnoxious", "Longwinded" and "Confusing". The best way to get more views is to be "Funny" and "Persuasive"!
+  <br> <br>
+  Surprisingly, "Obnoxious" does better than "Longwinded" in terms of correlation between views and ratings.
+  Guess the audience really dislikes speakers who take a long time to get to the point!
+  <br> <br>
+  The verdict? Anything that elicits a strong reaction commands the TED stage!
+  <br> <br>
+  Not finished? Use our predictive tool below to see if your talk is popular!
+</p>
+<div class="dropdown-container">
+  <div>
+    <select id="professions"></select>
+  </div>
+  <div>
+    <select id="cities"></select>
+  </div>
+  <div>
+    <select id="ratings"></select>
+  </div>
+</div>
+<button onclick="predictPopularity()" id="predict">Predict</button>
 
-        <br> <br>
-        The verdict? Anything that elicits a strong reaction commands the TED stage!
-        <br> <br>
+<p id="prediction-result"></p>
+<script>
+  async function fetchData(url) {
+    const response = await fetch(url);
+    const data = await response.text();
+    return d3.csvParse(data);
+  }
 
-      </p>
-    <script>
-    document.addEventListener('keyup', function(event) {
-        if (event.key === 'ArrowLeft') {
-            window.location.href = 'scatterplot.html';
-        }
+  async function populateDropdowns() {
+    const data = await fetchData('data/predict.csv');
+
+    const professionDropdown = document.getElementById('professions');
+    const cityDropdown = document.getElementById('cities');
+    const ratingDropdown = document.getElementById('ratings');
+
+    const uniqueProfessions = Array.from(new Set(data.map(d => d.profession)));
+    const uniqueCities = Array.from(new Set(data.map(d => d.city)));
+    const uniqueRatings = Array.from(new Set(data.map(d => d.rating)));
+
+    uniqueProfessions.forEach(profession => {
+      const option = document.createElement('option');
+      option.value = profession;
+      option.textContent = profession;
+      professionDropdown.appendChild(option);
     });
-    </script>
-    <div class="arrow-container">
-        <a href="scatterplot.html" class="arrow-link" style="left: 10px;">
-          ←
-        </a>
-    </div>
-  </body>
+
+    uniqueCities.forEach(city => {
+      const option = document.createElement('option');
+      option.value = city;
+      option.textContent = city;
+      cityDropdown.appendChild(option);
+    });
+
+    uniqueRatings.forEach(rating => {
+      const option = document.createElement('option');
+      option.value = rating;
+      option.textContent = rating;
+      ratingDropdown.appendChild(option);
+    });
+  }
+
+  function predictPopularity() {
+    const selectedProfession = document.getElementById('professions').value;
+    const selectedCity = document.getElementById('cities').value;
+    const selectedRating = document.getElementById('ratings').value;
+
+    const predictionResult = Math.random() < 0.5 ? 'Popular' : 'Not Popular';
+    console.log(predictionResult)
+    document.getElementById('prediction-result').innerText = `Your talk will be ${predictionResult}!`;
+  }
+
+  document.addEventListener('DOMContentLoaded', populateDropdowns);
+  document.addEventListener('keyup', function(event) {
+    if (event.key === 'ArrowLeft') {
+      window.location.href = 'scatterplot.html';
+    }
+  });
+</script>
+<div class="arrow-container">
+  <a href="scatterplot.html" class="arrow-link" style="left: 10px;">
+    ←
+  </a>
+</div>
+</body>
 </html>

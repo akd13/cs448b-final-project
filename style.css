@@ -364,6 +364,47 @@ body {
     animation: flash 2s linear infinite;
 }
 
-/*#viz3-svg {*/
-/*    transform: translateY(10%);*/
-/*}*/
+.conclusion {
+  background-color: black;
+  color: white;
+  font-family: "Karla", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.dropdown-container {
+  display: flex;
+  justify-content: center;
+    align-items: center;
+  margin-bottom: 20px;
+    gap: 100px;
+}
+
+#professions, #cities, #ratings {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #222;
+  color: white;
+  border: 1px solid #444;
+}
+
+#predict {
+  padding: 8px 20px;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#prediction-result {
+    color: white;
+    font-family: "financier-light", "HelveticaNeue", Helvetica, Arial, sans-serif;
+  margin-top: 20px;
+  font-size: 18px;
+}
