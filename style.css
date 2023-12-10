@@ -283,7 +283,7 @@ body {
 .speed-control {
     position: absolute;
     left: 10px;
-    bottom: 10px;
+    bottom: 30px;
     padding: 5px;
     border-radius: 5px;
 }
