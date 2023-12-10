@@ -2,28 +2,28 @@
 #viz1 {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
-    overflow: scroll;
-    margin-top: 50px;
+    margin-top: 20px;
+    overflow: hidden;
+    scroll-behavior: smooth;
 }
 
 #viz1-heading, #viz1-heading-outside {
     font-family: "Karla","sans-serif";
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 400;
     pointer-events: none !important;
     cursor: pointer;
     text-align: center;
     color: #fcdcbf;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    width: 100%; /* Set the width to take up the full container width */
-    margin: 0 auto; /* Center the element within its container */
-    /*transform: translateY(-100%); !* Adjust if needed for vertical alignment *!*/
+    width: 100%;
+    margin: 0 auto;
 }
 
 #viz1-svg,
 #viz2-svg {
     box-sizing: border-box;
-    height: 100px;
+    height: 70px;
     margin-bottom: 0;
     overflow: visible;
 }
@@ -31,26 +31,16 @@
     overflow: visible;
 }
 
-#viz1-svg-main {
-   transform: translateX(10%);
-}
-
 #viz-container {
     display: flex;
     align-items: center;
-    gap: 0;
+    /*gap: 0;*/
 }
-
-
-.arrow-container {
-    clear: both;
-}
-
 
 #text-page {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
-    overflow: scroll; /* Enable scroll if needed */
+    overflow: scroll;
 }
 
 #text-page-heading {
@@ -68,7 +58,7 @@
 #text-page-content {
     margin: 4%;
     font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
     /*transform: translateY(5%);*/
     cursor: pointer;
@@ -87,12 +77,9 @@
         transform: translateY(0);
     }
 }
-.viz-descr {
-    color: #0088cc;"
-}
 
 #funfact {
-    color: #fcdcbf;
+    color: #e77107;
 }
 #text-page-content {
     animation: fadeInUp 1.5s ease-out;
@@ -156,29 +143,13 @@
     background-color: white;
 }
 
-#viz1-legend {
-    position: absolute;
-    top: 8%;
-    right: 0;
-    padding: 10px;
+.viz-descr {
+    font-family: "financier-light", "HelveticaNeue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: skyblue;
+    text-align: center;
+    margin: 1em 10em 1em;
 }
-
-#attribute-selector-country {
-    margin: 5px;
-    padding: 5px;
-    border-radius: 5px;
-    width: 150px;
-    font-family: "Karla", "sans-serif";
-    font-size: small;
-    position: absolute;
-    top: 8%;
-    left: 0;
-}
-
-#viz1-svg-main {
-    padding: 10px;
-}
-
 /*Viz 2*/
 body {
     margin: 0;
@@ -188,7 +159,7 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    background-color: #050404;
+    background-image: url("images/night-sky.png");
     position: relative;
 }
 
