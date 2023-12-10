@@ -2,8 +2,8 @@
 #viz1 {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
-    /*overflow: scroll;*/
     margin-top: 50px;
+    scroll-behavior: auto;
 }
 
 #viz1-heading, #viz1-heading-outside {
@@ -30,21 +30,16 @@
     overflow: visible;
 }
 
-#viz1-svg-main {
-   transform: translateX(10%);
-}
-
 #viz-container {
     display: flex;
     align-items: center;
-    gap: 0;
+    /*gap: 0;*/
 }
 
 
 .arrow-container {
     clear: both;
 }
-
 
 #text-page {
     background-image: url("images/night-sky.png");
@@ -154,29 +149,6 @@
 
 .arrow-key {
     background-color: white;
-}
-
-#viz1-legend {
-    position: absolute;
-    top: 8%;
-    right: 0;
-    padding: 10px;
-}
-
-#attribute-selector-country {
-    margin: 5px;
-    padding: 5px;
-    border-radius: 5px;
-    width: 150px;
-    font-family: "Karla", "sans-serif";
-    font-size: small;
-    position: absolute;
-    top: 8%;
-    left: 0;
-}
-
-#viz1-svg-main {
-    padding: 10px;
 }
 
 /*Viz 2*/

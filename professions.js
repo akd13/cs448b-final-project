@@ -1,15 +1,16 @@
-var margin = { top: 30, right: 30, bottom: 70, left: 60 },
-    width = window.innerWidth - margin.left*10 - margin.right*10,
-    height = window.innerHeight - margin.top - margin.bottom*5;
+var margin = { top: 0.05, right: 0.1, bottom: 0.05, left: 0.1 };
+var width = window.innerWidth * (1 - 3*margin.left - 3*margin.right);
+var height = window.innerHeight * (1 - 5*margin.top - 4*margin.bottom);
 
-
+console.log(window.innerWidth, window.innerHeight);
 const svg = d3
     .select("#viz1-svg")
     .append("svg")
     .attr("id", "viz1-svg-main")
-    .attr("width", '50vw')
+    .attr("width", '43vw')
     .attr("height", '100vh')
-    // .style("margin-left", "5vw")
+    .style("margin-left", window.innerWidth * margin.left*2.3 + "px")
+    .style("padding", "10px")
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
@@ -18,12 +19,13 @@ const svg2 = d3
     .select("#viz2-svg")
     .append("svg")
     .attr("id", "viz2-svg-main")
-    .attr("width", '50vw')
+    .attr("width", '55vw')
     .attr("height", '100vh')
-    // .style("margin-right", "40px")
+    // .style("margin-right", "20px")
+    // .style("padding", "10px")
     .append("g")
     .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+        "translate(" + margin.right + "," + margin.top + ")");
 
 const instructionText = svg.append("text")
     .attr("class", "instruction-text")
@@ -44,10 +46,12 @@ d3.csv("data/occupation_views_averaged.csv").then(function (data) {
         .range([ 0, width ])
         .domain(data.map(function(d) { return d.Occupation_cluster; }))
         .padding(0.2);
+
     svg.append("g")
         .attr("transform", "translate(0," + (height - 10) + ")")
         .call(d3.axisBottom(x))
         .selectAll("text")
+        .attr("class", "x-axis-label")
         .attr("transform", "translate(-10,15)rotate(-45)")
         .style("text-anchor", "end")
         .style("fill", "#fcdcbf")
@@ -91,7 +95,7 @@ function showClusterDetails(clusterName) {
     d3.csv(clusterName).then(function (data2) {
         var sortedAndLimitedData = data2.sort(function(a, b) {
             return b.Views - a.Views;
-        }).slice(0, 20);
+        }).slice(0, 10);
         var x2 = d3.scaleBand()
             .range([ 0, width ])
             .domain(sortedAndLimitedData.map(function(d) { return d.Occupation; }))
@@ -101,12 +105,13 @@ function showClusterDetails(clusterName) {
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x2))
             .selectAll("text")
+            .attr("class", "x-axis-label")
             .attr("transform", "translate(-10,10)rotate(-45)")
             .style("text-anchor", "end")
             .style("fill", "#fcdcbf")
             .style("font-size", "16px");
 
-// Add Y axis
+        // Add Y axis
         var y2 = d3.scaleLinear()
             .domain([0, d3.max(sortedAndLimitedData, function(d) { return +d.Views; })])
             .range([ height, 0]);
@@ -118,7 +123,7 @@ function showClusterDetails(clusterName) {
             .style("fill", "#fcdcbf")
             .style("font-size", "16px");
 
-// Bars
+        // Bars
         svg2.selectAll("mybar2")
             .data(sortedAndLimitedData)
             .enter()
