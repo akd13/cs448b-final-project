@@ -2,13 +2,14 @@
 #viz1 {
     background-image: url("images/night-sky.png");
     font-family: "Karla", "sans-serif";
-    margin-top: 50px;
-    scroll-behavior: auto;
+    margin-top: 20px;
+    overflow: hidden;
+    scroll-behavior: smooth;
 }
 
 #viz1-heading, #viz1-heading-outside {
     font-family: "Karla","sans-serif";
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 400;
     pointer-events: none !important;
     cursor: pointer;
@@ -22,7 +23,7 @@
 #viz1-svg,
 #viz2-svg {
     box-sizing: border-box;
-    height: 100px;
+    height: 70px;
     margin-bottom: 0;
     overflow: visible;
 }
@@ -34,11 +35,6 @@
     display: flex;
     align-items: center;
     /*gap: 0;*/
-}
-
-
-.arrow-container {
-    clear: both;
 }
 
 #text-page {
@@ -80,10 +76,6 @@
         opacity: 1;
         transform: translateY(0);
     }
-}
-.viz-descr {
-    font-size: smaller;
-    color: #0088cc;
 }
 
 #funfact {
@@ -151,6 +143,13 @@
     background-color: white;
 }
 
+.viz-descr {
+    font-family: "financier-light", "HelveticaNeue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: skyblue;
+    text-align: center;
+    margin: 1em 10em 2em;
+}
 /*Viz 2*/
 body {
     margin: 0;

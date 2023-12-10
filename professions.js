@@ -8,7 +8,7 @@ const svg = d3
     .append("svg")
     .attr("id", "viz1-svg-main")
     .attr("width", '43vw')
-    .attr("height", '100vh')
+    .attr("height", '50%')
     .style("margin-left", window.innerWidth * margin.left*2.3 + "px")
     .style("padding", "10px")
     .append("g")
@@ -20,7 +20,7 @@ const svg2 = d3
     .append("svg")
     .attr("id", "viz2-svg-main")
     .attr("width", '55vw')
-    .attr("height", '100vh')
+    .attr("height", '50%')
     // .style("margin-right", "20px")
     // .style("padding", "10px")
     .append("g")
@@ -33,7 +33,7 @@ const instructionText = svg.append("text")
     .attr("y", height / 6)
     .attr("text-anchor", "middle")
     .style("fill", "white")
-    .style("font-size", "16px")
+    .style("font-size", "14px")
     .style("font-family", "Karla; sans-serif")
 
 instructionText.append("tspan")
@@ -55,7 +55,7 @@ d3.csv("data/occupation_views_averaged.csv").then(function (data) {
         .attr("transform", "translate(-10,15)rotate(-45)")
         .style("text-anchor", "end")
         .style("fill", "#fcdcbf")
-        .style("font-size", "16px");
+        .style("font-size", "14px");
 
     // Add Y axis
     var y = d3.scaleLinear()
@@ -67,7 +67,7 @@ d3.csv("data/occupation_views_averaged.csv").then(function (data) {
         }))
         .selectAll("text")
         .style("fill", "#fcdcbf")
-        .style("font-size", "16px");
+        .style("font-size", "14px");
 
     svg.selectAll("mybar")
         .data(data)
@@ -109,7 +109,7 @@ function showClusterDetails(clusterName) {
             .attr("transform", "translate(-10,10)rotate(-45)")
             .style("text-anchor", "end")
             .style("fill", "#fcdcbf")
-            .style("font-size", "16px");
+            .style("font-size", "14px");
 
         // Add Y axis
         var y2 = d3.scaleLinear()
@@ -121,7 +121,7 @@ function showClusterDetails(clusterName) {
             }))
             .selectAll("text")
             .style("fill", "#fcdcbf")
-            .style("font-size", "16px");
+            .style("font-size", "14px");
 
         // Bars
         svg2.selectAll("mybar2")
