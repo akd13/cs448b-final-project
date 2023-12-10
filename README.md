@@ -1,6 +1,6 @@
 # cs448b-final-project
 
-## Visualisation
+## Visualisations
 1. Viz 1: [Proessional Background](https://cs448b-final-project-eeb9e.web.app/professions.html)
 2. Viz 2: [Geographical Background](https://cs448b-final-project-eeb9e.web.app/birthplaces.html)
 3. Viz 3: [Cultural Background](https://cs448b-final-project-eeb9e.web.app/scatterplot.html)
