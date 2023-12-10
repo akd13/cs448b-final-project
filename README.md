@@ -16,7 +16,7 @@
 8. [Merge](https://stackoverflow.com/questions/47066905/d3-merge-function) 
 
 ### Work Distribution 
-1. Narrative - Both
+1. Narrative - Akankshita and Ananya
 2. Viz 1 - Ananya
 3. Viz 2 - Akankshita
-4. Viz 3 - Both 
+4. Viz 3 - Akankshita and Ananya 
