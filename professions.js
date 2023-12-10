@@ -40,6 +40,15 @@ instructionText.append("tspan")
     .attr("x", width / 2)
     .attr("dy", "-0.6em")
     .text("mousover bars to see details");
+
+const svgTitle1 = d3.select("#viz1-svg-main")
+  .append("text")
+  .attr("x", width/1.5)
+  .attr("y", 20)
+  .attr("text-anchor", "end")
+  .attr("fill", "white")
+  .text("Professional Categories");
+
 d3.csv("data/occupation_views_averaged.csv").then(function (data) {
 
     var x = d3.scaleBand()
@@ -111,6 +120,13 @@ function showClusterDetails(clusterName) {
             .style("fill", "#fcdcbf")
             .style("font-size", "14px");
 
+        svg2
+          .append("text")
+          .attr("x", width/1.5)
+          .attr("y", 20)
+          .attr("text-anchor", "end")
+          .attr("fill", "white")
+          .text("Most Viewed Speaker Professions");
         // Add Y axis
         var y2 = d3.scaleLinear()
             .domain([0, d3.max(sortedAndLimitedData, function(d) { return +d.Views; })])
