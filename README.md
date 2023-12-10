@@ -1,9 +1,9 @@
 # cs448b-final-project
 
-## Visualisation
-1. Viz 1: [Does number of languages a talk is available in influence views?](https://cs448b-final-project-eeb9e.web.app)
-2. Viz 2: [Does a Speaker's Birthplace Influence the Popularity of Their TED Talks?](https://cs448b-final-project-eeb9e.web.app/birthplaces.html)
-3. Viz 3: [Do the ratings of a talk influence the number of views it gets?](https://cs448b-final-project-eeb9e.web.app/scatterplot.html)
+## Visualisations
+1. Viz 1: [Proessional Background](https://cs448b-final-project-eeb9e.web.app/professions.html)
+2. Viz 2: [Geographical Background](https://cs448b-final-project-eeb9e.web.app/birthplaces.html)
+3. Viz 3: [Cultural Background](https://cs448b-final-project-eeb9e.web.app/scatterplot.html)
 
 ### Sources
 1. [Data](https://www.kaggle.com/rounakbanik/the-movies-dataset)
@@ -12,3 +12,5 @@
 4. [Me Too Rising](https://metoorising.withgoogle.com/)
 5. [D3 graphs](https://d3-graph-gallery.com/scatter.html)
 6. [Brushing Scatterplot](https://d3-graph-gallery.com/graph/interactivity_brush.html)
+7. [Bar Plot](https://d3-graph-gallery.com/barplot)
+8. [Merge](https://stackoverflow.com/questions/47066905/d3-merge-function) 
