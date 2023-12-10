@@ -78,16 +78,31 @@
     });
   }
 
+  function clearPredictionResult() {
+    document.getElementById('prediction-result').innerText = '';
+  }
+
+  function addDropdownListeners() {
+    const dropdowns = document.querySelectorAll('.dropdown-container select');
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('change', clearPredictionResult);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    populateDropdowns();
+    addDropdownListeners();
+  });
+
   function predictPopularity() {
     Promise.all([
       getPoints('professions'),
       getPoints('cities'),
       getPoints('ratings')
     ]).then(([professionPoints, cityPoints, ratingPoints]) => {
-      console.log(professionPoints, cityPoints, ratingPoints);
       const totalPoints = professionPoints + cityPoints + ratingPoints;
-      const predictionResult = totalPoints > 15 ? 'Be Popular' : 'Not Be Popular';
-      document.getElementById('prediction-result').innerText = `Your talk will: ${predictionResult}!`;
+      const predictionResult = totalPoints > 15 ? 'Popular' : 'Not Popular';
+      document.getElementById('prediction-result').innerText = `Your talk is going to be: ${predictionResult}!`;
     });
   }
 
