@@ -22,5 +22,5 @@
 2. Viz 1 - Ananya
 3. Viz 2 - Akankshita
 4. Viz 3 - Akankshita and Ananya 
-5. Data crawling and preprocessing (for birthplace and clustering) - Akankshita
-6. Storyline - Ananya
+5. Data crawling, preprocessing (for birthplace and clustering) and firebase hosting - Akankshita
+6. Storyline and research - Ananya
