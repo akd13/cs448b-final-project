@@ -15,9 +15,12 @@
 7. [Bar Plot](https://d3-graph-gallery.com/barplot)
 8. [Merge](https://stackoverflow.com/questions/47066905/d3-merge-function) 
 9. [AI Classification Tool](ai-classification.py)
+10. [Data Crawling for Birthplace](data-preprocess)
 
 ### Work Distribution 
 1. Narrative - Akankshita and Ananya
 2. Viz 1 - Ananya
 3. Viz 2 - Akankshita
 4. Viz 3 - Akankshita and Ananya 
+5. Data crawling and preprocessing (for birthplace and clustering) - Akankshita
+6. Storyline - Ananya
