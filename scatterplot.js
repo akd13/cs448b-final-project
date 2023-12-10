@@ -204,7 +204,7 @@ function updateChart(event, data) {
         .call(d3.axisBottom(xAxis)
             .tickSize(5)
             .tickFormat(function(d) {
-                if (d>1000) {
+                if (d>999) {
                     return d3.formatPrefix(".0", 1000)(d);
                 }
                 else{
