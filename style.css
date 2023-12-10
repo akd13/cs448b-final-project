@@ -58,7 +58,7 @@
 #text-page-content {
     margin: 4%;
     font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 400;
     /*transform: translateY(5%);*/
     cursor: pointer;
@@ -79,7 +79,7 @@
 }
 
 #funfact {
-    color: #fcdcbf;
+    color: #e77107;
 }
 #text-page-content {
     animation: fadeInUp 1.5s ease-out;

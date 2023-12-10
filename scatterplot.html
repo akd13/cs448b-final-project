@@ -7,21 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body id='viz3'>
-    <div id="scatterplot"></div>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <div id="selectors-viz3" style="padding-top: 80px;">
-        <select id="attribute-selector-rating">Funny</select>
-    </div>
-    <div id="viz3-svg">
-        <h2> </h2>
-        <h2 id="viz1-heading-outside">
+        <h2 id="viz1-heading-outside" style="padding-top: 1rem">
             Cultural Background: your upbringing
           </h2>
+            <div class="viz-descr">
+                <span>
+                    This visualisation focuses on how the speaker's disposition and speech is perceived by the public.
+                    Explore different ratings and learn about how each one drives the number of views. Zoom in by selecting an area on the x-axis.
+                    Hover on each talk to learn speaker name and topic, and click on each talk to watch it!
+                </span>
+            </div>
 <!--          <p id="text-page-content">-->
 <!--            <span id="viz-descr">-->
 <!--                This visualisation focuses on the Americas and Europe, and breakdown views by ratings.-->
 <!--          </span>-->
 <!--        </p>-->
+    <div id="scatterplot"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <div id="selectors-viz3" style="transform: translateY(70%);">
+        <select id="attribute-selector-rating">Funny</select>
+    </div>
+    <div id="viz3-svg">
     </div>
     <div id="lineOfBestFitContainer" style="padding: 20px">
         <input type="checkbox" id="lineOfBestFitCheckbox">
@@ -40,6 +46,14 @@
     }
     });
 </script>
+<div class="arrow-container">
+    <a href="birthplaces.html" class="arrow-link" style="left: 10px;">
+        ←
+    </a>
+    <a href="conclusion.html" class="arrow-link" style="right: 10px;">
+        →
+    </a>
+</div>
 <div class="arrow-container">
     <a href="birthplaces.html" class="arrow-link" style="left: 10px;">
         ←
