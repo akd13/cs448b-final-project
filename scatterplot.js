@@ -110,6 +110,14 @@ function updatePlot() {
         xAxisGroup
             .call(d3.axisBottom(xAxis)
                 .tickSize(5)
+                .tickFormat(function(d) {
+                    if (d>1000) {
+                        return d3.formatPrefix(".0", 1000)(d);
+                    }
+                    else{
+                        return d;
+                    }
+                })
             )
             .selectAll("text")
             .style("font-size", "18px");
@@ -195,6 +203,14 @@ function updateChart(event, data) {
     xAxisGroup.transition().duration(1000)
         .call(d3.axisBottom(xAxis)
             .tickSize(5)
+            .tickFormat(function(d) {
+                if (d>1000) {
+                    return d3.formatPrefix(".0", 1000)(d);
+                }
+                else{
+                    return d;
+                }
+            })
         )
         .selectAll("text")
         .style("font-size", "18px");
