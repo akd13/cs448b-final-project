@@ -60,6 +60,7 @@
     font-family: "financier-light","HelveticaNeue",Helvetica,Arial,sans-serif;
     font-size: 20px;
     font-weight: 400;
+    pointer-events: none;
     /*transform: translateY(5%);*/
     cursor: pointer;
     text-align: center;
@@ -78,9 +79,6 @@
     }
 }
 
-#funfact {
-    color: #e77107;
-}
 #text-page-content {
     animation: fadeInUp 1.5s ease-out;
 }
@@ -149,6 +147,7 @@
     color: skyblue;
     text-align: center;
     margin: 1em 10em 1em;
+    animation: fadeInUp 1.5s ease-out;
 }
 /*Viz 2*/
 body {
